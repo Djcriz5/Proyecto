@@ -87,5 +87,11 @@ public class IngredienteEspecial {
     private boolean setDisponibilidad(){
       return(index!=0); 
     }
+    public void setIndex(int id){
+        index=id;
+    }
+    public double getPrecio(){
+        return precioIngrediente;
+    }
 
 }

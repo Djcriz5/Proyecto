@@ -3,39 +3,47 @@ package Aplicacion;
 public class Producto {
     private int index;
     private String tipoDeProducto;
-    private double Precio;
-    private long numeroDeOrden;
-    public Producto(long numeroOrden,int id) {
-        numeroDeOrden=numeroOrden;
+    public Producto(int id) {
         index=id;
         tipoDeProducto=setTipoDeProducto(index);
-        
     }
     public String getTipoDeProducto() {
         return tipoDeProducto;
     }
-    public String setTipoDeProducto(int id) {
-        switch (id) {
+    public String setTipoDeProducto(int idx) {
+        switch (idx) {
         case 1:
-            tipoDeProducto="Papas";
+            tipoDeProducto="Frituras";
             break;
         case 2:
-            tipoDeProducto="Refresco";
+            tipoDeProducto="Bebidas";
             break;
         case 3:
-            tipoDeProducto="Yogurth";
+            tipoDeProducto="Lacteos";
             break;
         case 4:
-            tipoDeProducto="paletas";
+            tipoDeProducto="Helados";
             break;
         case 5:
-            tipoDeProducto="gomitas";
+            tipoDeProducto="Dulces";
             break;
+        case 6:
+            tipoDeProducto="Preparado";
+            break;
+        case 7:
+            tipoDeProducto="Paquete del dia";
+            break;
+
 
         default:
             break;
         }
         return tipoDeProducto;
     }
-    
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("\ntipo de producto:\n"+tipoDeProducto);
+        return builder.toString();
+
+    }
 }
