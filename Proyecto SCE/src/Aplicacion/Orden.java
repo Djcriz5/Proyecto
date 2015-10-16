@@ -3,5 +3,8 @@ package Aplicacion;
 public class Orden {
     private String Producto;
     private double Precio;
-    private double hora;
+    public Orden() {
+        // TODO Auto-generated constructor stub
+    }
+    
 }
