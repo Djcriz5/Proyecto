@@ -1,6 +1,6 @@
 package Aplicacion;
 
-public class Producto {
+public abstract class Producto {
     private int index;
     private String tipoDeProducto;
     public Producto(int id) {
