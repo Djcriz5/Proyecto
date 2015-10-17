@@ -1,8 +1,8 @@
 package Aplicacion;
 
 public class IngredienteEspecial {
-    int     index;
-    String  tipo;
+    private int     index;
+    private String  tipo;
     double  precioIngrediente;
     boolean disponibilidad;
 
@@ -11,9 +11,9 @@ public class IngredienteEspecial {
     }
 
     public IngredienteEspecial(int cual) {
-        index = cual;
-        tipo = setTipo(index);
-        precioIngrediente=setPrecio(tipo);
+        setIndex(cual);
+        setTipo(index);
+        precioIngrediente=setPrecio(getTipo());
         disponibilidad=setDisponibilidad();
 
     }
@@ -44,10 +44,9 @@ public class IngredienteEspecial {
         case 8:
             tipo = "chocolate";
             break;
-
-        default:
-            index=0;
-            tipo = "ingrediente no especificado";
+        case 0:
+            tipo="no ingrediente extra";
+            
             break;
         }
         return tipo;
@@ -85,13 +84,22 @@ public class IngredienteEspecial {
         return precioIngrediente;
     }
     private boolean setDisponibilidad(){
-      return(index!=0); 
-    }
-    public void setIndex(int id){
-        index=id;
+      return(getIndex()!=0); 
     }
     public double getPrecio(){
         return precioIngrediente;
     }
+    public void setIndex(int cual){
+        index=cual;
+        setTipo(cual);
+    }
 
+    public int getIndex() {
+        return index;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+    
 }

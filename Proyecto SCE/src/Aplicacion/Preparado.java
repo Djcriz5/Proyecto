@@ -10,16 +10,32 @@ public class Preparado extends Producto {
 
     public Preparado(int id) {
         super(6);
+        extra = new IngredienteEspecial();
         FlagGuisadoDeldia = 0;
         indexPreparado = id;
-        extra = new IngredienteEspecial();
         tipoDePreparado = setTipoDePreparado(indexPreparado);
         if (indexPreparado == 9) {
             getGuisadoDeldia();
             FlagGuisadoDeldia++;
             tipoDePreparado = setTipoDePreparado(indexPreparado);
+
         }
-        precio=setPrecio(tipoDePreparado);
+        precio = setPrecio(tipoDePreparado);
+    }
+
+    public Preparado(int id, int extraID) {
+        super(6);
+        extra = new IngredienteEspecial(extraID);
+        FlagGuisadoDeldia = 0;
+        indexPreparado = id;
+        tipoDePreparado = setTipoDePreparado(indexPreparado);
+        if (indexPreparado == 9) {
+            getGuisadoDeldia();
+            FlagGuisadoDeldia++;
+            tipoDePreparado = setTipoDePreparado(indexPreparado);
+
+        }
+        precio = setPrecio(tipoDePreparado) + extra.getPrecio();
     }
 
     public String setTipoDePreparado(int idx) {
@@ -28,10 +44,10 @@ public class Preparado extends Producto {
             tipoDePreparado = "Sandwich";
             break;
         case 2:
-            tipoDePreparado = "Molletes";
+            tipoDePreparado = "Tortas";
             break;
         case 3:
-            tipoDePreparado = "Tortas";
+            tipoDePreparado = "Molletes";
             break;
         case 4:
             tipoDePreparado = "Ensalada de Atun";
@@ -58,37 +74,38 @@ public class Preparado extends Producto {
         }
         return tipoDePreparado;
     }
-    public double setPrecio(String tipo){
+
+    public double setPrecio(String tipo) {
         switch (tipo) {
         case "Sandwich":
-            precio=14.50;
+            precio = 14.50;
             break;
         case "Molletes":
-            precio=12.50;
+            precio = 12.50;
 
             break;
         case "Tortas":
-            precio=17.50;
+            precio = 17.50;
 
             break;
         case "Ensalada de Atun":
-            precio=18.50;
+            precio = 18.50;
 
             break;
         case "Ensalada de pollo":
-            precio=21.00;
+            precio = 21.00;
             break;
         case "Pechuga Empanisada con ensalada":
-            precio=22.00;
+            precio = 22.00;
             break;
         case "Enchiladas":
-            precio=18.50;
+            precio = 18.50;
             break;
         case "Orden de tacos":
-            precio=14.50;
+            precio = 14.50;
             break;
         case "Guisado Del dia":
-            precio=11.00;
+            precio = 11.00;
             break;
         default:
             indexPreparado = 0;
@@ -96,21 +113,33 @@ public class Preparado extends Producto {
             break;
         }
         return precio;
-        
+
     }
+
     public void getGuisadoDeldia() {
-        indexPreparado = (int) (Math.random() * 8 + 1);
+        indexPreparado = (int) (Math.random() * (9 - 2) + 2);
+    }
+
+    public void setIngredienteEspecial(int cual) {
+        IngredienteEspecial p = new IngredienteEspecial(cual);
+        extra = p;
+        precio += extra.precioIngrediente;
+        p=null;
     }
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (FlagGuisadoDeldia != 0) {
-            builder.append(super.toString()+"\nGuisado del dia:\n" + tipoDePreparado + "\n Precio :" + precio);
-        }else
-            builder.append(super.toString()+"\n"+ tipoDePreparado + "\n Precio :" + precio);
-        if(disponibilidad=true){
+            builder.append(super.toString() + "\nGuisado del dia:\n" + tipoDePreparado);
+        } else
+            builder.append(super.toString() + "\n" + tipoDePreparado);
+        if (extra.getIndex() != 0) {
+            builder.append("\ningredientes especiales:\n" + extra.getTipo());
+        }
+        if (disponibilidad = true) {
             builder.append("\nDisponible");
         }
+        builder.append("\nPrecio: $" + precio);
         return builder.toString();
 
     }

@@ -14,6 +14,9 @@ public class Bebida extends Producto {
         disponibilidad = setDisponibilidad();
 
     }
+    public Bebida() {
+        this(0);
+    }
 
     public String setTipoDeBebida(int id) {
 
@@ -96,6 +99,24 @@ public class Bebida extends Producto {
 
     private boolean setDisponibilidad() {
         return (indexBebida != 0);
+    }
+    public void setBebida(int indx){
+        indexBebida=indx;
+        tipoDeBebida = setTipoDeBebida(indexBebida);
+        precio = setPrecio(tipoDeBebida);
+        disponibilidad = setDisponibilidad();
+        
+    }
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        if (disponibilidad) {
+            builder.append(
+                    super.toString() + "\nTipo:\n" + tipoDeBebida + "\nPrecio: $" + precio + "\n" + disponibilidad);
+        } else {
+            builder.append("Bebida No Disponible");
+        }
+        return builder.toString();
+
     }
 
 }
