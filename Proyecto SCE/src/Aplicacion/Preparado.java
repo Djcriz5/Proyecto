@@ -1,12 +1,12 @@
 package Aplicacion;
 
 public class Preparado extends Producto {
-    IngredienteEspecial extra;
-    int                 indexPreparado;
-    String              tipoDePreparado;
-    double              precio;
-    boolean             disponibilidad;
-    int                 FlagGuisadoDeldia;
+   private IngredienteEspecial extra;
+   private int                 indexPreparado;
+   private String              tipoDePreparado;
+   private double              precio;
+   private boolean             disponibilidad;
+   private int                 FlagGuisadoDeldia;
 
     public Preparado(int id) {
         super(6);
@@ -21,6 +21,7 @@ public class Preparado extends Producto {
 
         }
         precio = setPrecio(tipoDePreparado);
+        disponibilidad=setDisponibilidad();
     }
 
     public Preparado(int id, int extraID) {
@@ -126,7 +127,12 @@ public class Preparado extends Producto {
         precio += extra.precioIngrediente;
         p=null;
     }
-
+    private boolean setDisponibilidad(){
+        return(indexPreparado!=0); 
+      }
+    public double getPrecio() {
+        return precio;
+    }
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (FlagGuisadoDeldia != 0) {
@@ -136,7 +142,7 @@ public class Preparado extends Producto {
         if (extra.getIndex() != 0) {
             builder.append("\ningredientes especiales:\n" + extra.getTipo());
         }
-        if (disponibilidad = true) {
+        if (disponibilidad) {
             builder.append("\nDisponible");
         }
         builder.append("\nPrecio: $" + precio);

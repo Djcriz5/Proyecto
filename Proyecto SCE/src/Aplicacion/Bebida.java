@@ -6,6 +6,9 @@ public class Bebida extends Producto {
     double  precio;
     boolean disponibilidad;
 
+    public Bebida() {
+        this(0);
+    }
     public Bebida(int idBebida) {
         super(2);
         indexBebida = idBebida;
@@ -13,9 +16,6 @@ public class Bebida extends Producto {
         precio = setPrecio(tipoDeBebida);
         disponibilidad = setDisponibilidad();
 
-    }
-    public Bebida() {
-        this(0);
     }
 
     public String setTipoDeBebida(int id) {
@@ -107,11 +107,14 @@ public class Bebida extends Producto {
         disponibilidad = setDisponibilidad();
         
     }
+    public double getPrecio() {
+        return precio;
+    }
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (disponibilidad) {
             builder.append(
-                    super.toString() + "\nTipo:\n" + tipoDeBebida + "\nPrecio: $" + precio + "\n" + disponibilidad);
+                    super.toString() + "\nTipo:\n" + tipoDeBebida + "\nPrecio: $" + precio + "\nDisponible" );
         } else {
             builder.append("Bebida No Disponible");
         }

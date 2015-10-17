@@ -8,7 +8,12 @@ public class probador {
          name.setIngredienteEspecial(3 );
          System.out.println(name);
          Bebida mibebida = new Bebida();
+         mibebida.setBebida(5);
          System.out.println(mibebida);
+         Lacteos yogurt =new Lacteos();
+        System.out.println(yogurt);
+        yogurt.setLacteo(3);
+        System.out.println(yogurt);
 
     }
 

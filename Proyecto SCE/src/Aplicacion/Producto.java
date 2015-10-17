@@ -1,4 +1,4 @@
-package Aplicacion;
+        package Aplicacion;
 
 public abstract class Producto {
     private int index;
