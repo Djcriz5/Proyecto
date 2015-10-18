@@ -33,6 +33,9 @@ public abstract class Producto {
         case 7:
             tipoDeProducto="Paquete del dia";
             break;
+        case 8:
+            tipoDeProducto="Cafe";
+            break;
 
 
         default:
