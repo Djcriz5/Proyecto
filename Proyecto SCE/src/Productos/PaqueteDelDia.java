@@ -1,7 +1,8 @@
-package Aplicacion;
+package Productos;
 
-public class PaqueteDelDia extends Producto {
+public class PaqueteDelDia extends Producto implements IContable {
     private Preparado platofuerte;
+    private String[] guarniciones={"Arroz","Sopa","spaguetti","frijoles"};
     private Bebida    bebidaPaquete;
     private String    guarnicion;
     private boolean   disponibilidad;
@@ -28,6 +29,15 @@ public class PaqueteDelDia extends Producto {
         disponibilidad=setDisponibilidad();
         
     }
+    public PaqueteDelDia(int bebida,int guanicion) {//el precio de este sera el costo del plato del dia + 5 guarnicion+ precio de la bebida 
+        super(8);                   
+        platofuerte = new Preparado(9);
+        bebidaPaquete = new Bebida(bebida);
+        guarnicion=guarniciones[guanicion];
+        precio=(platofuerte.getPrecio()+bebidaPaquete.getPrecio()+5);
+        disponibilidad=setDisponibilidad();
+        
+    }
 
     public Preparado getPlatofuerte() {
         return platofuerte;
@@ -42,10 +52,8 @@ public class PaqueteDelDia extends Producto {
     }
 
     public String setGuarnicion() {
-        String[] guarniciones={"Arroz","Sopa","spaguetti","frijoles"};
         int seleccion = (int) (Math.random() * 4);
         guarnicion=guarniciones[seleccion];
-        guarniciones=null;
         seleccion=0;
         return guarnicion;
     }
@@ -65,7 +73,7 @@ public class PaqueteDelDia extends Producto {
         StringBuilder builder = new StringBuilder();
         if (disponibilidad) {
             builder.append(
-                    super.toString() + "\nPlato fuerte:\n" + platofuerte +"\nGuarnicion:"+guarnicion+"\nBebida: "+bebidaPaquete+"\nPrecio: $" + precio + "\nDisponible" );
+                    super.toString() + "\nPlato fuerte:" + platofuerte +"\nGuarnicion:"+guarnicion+"\nBebida: "+bebidaPaquete+"\nPrecio paquete: $" + precio + "\nDisponible" );
         } else {
             builder.append("paquete No Disponible");
         }

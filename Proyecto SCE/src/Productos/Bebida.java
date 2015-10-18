@@ -1,6 +1,6 @@
-package Aplicacion;
+package Productos;
 
-public class Bebida extends Producto {
+public class Bebida extends Producto implements IContable{
     int     indexBebida;
     String  tipoDeBebida;
     double  precio;
@@ -108,7 +108,7 @@ public class Bebida extends Producto {
         
     }
     public void bebidaRandom(){
-        int seleccion = (int) (Math.random() * 10+1);
+        int seleccion = (int) (Math.random() *10)+1;
         setBebida(seleccion);
     }
     public double getPrecio() {

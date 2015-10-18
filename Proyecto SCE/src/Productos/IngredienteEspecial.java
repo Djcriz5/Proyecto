@@ -1,4 +1,4 @@
-package Aplicacion;
+package Productos;
 
 public class IngredienteEspecial {
     private int     index;

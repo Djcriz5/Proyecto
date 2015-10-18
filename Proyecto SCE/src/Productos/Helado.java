@@ -1,16 +1,16 @@
-package Aplicacion;
+package Productos;
 
-public class Helados extends Producto {
+public class Helado extends Producto implements IContable{
     private int     indexHelado;
     private String  tipoHelado;
     private double  precio;
     private boolean disponibilidad;
 
-    public Helados() {
+    public Helado() {
         this(0);
     }
 
-    public Helados(int idx) {
+    public Helado(int idx) {
         super(4);
         indexHelado = idx;
         tipoHelado = setTipoDeHelado(indexHelado);

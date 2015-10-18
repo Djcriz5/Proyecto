@@ -1,6 +1,6 @@
-package Aplicacion;
+package Productos;
 
-public class Preparado extends Producto {
+public class Preparado extends Producto implements IContable{
    private IngredienteEspecial extra;
    private int                 indexPreparado;
    private String              tipoDePreparado;

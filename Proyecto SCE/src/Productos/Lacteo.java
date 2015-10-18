@@ -1,16 +1,16 @@
-package Aplicacion;
+package Productos;
 
-public class Lacteos extends Producto {
+public class Lacteo extends Producto implements IContable {
     private int     indexLacteo;
     private String  tipoLacteo;
     private double  precio;
     private boolean disponibilidad;
 
-    public Lacteos() {
+    public Lacteo() {
         this(0);
     }
 
-    public Lacteos(int index) {
+    public Lacteo(int index) {
         super(3);
         indexLacteo = index;
         tipoLacteo = setTipoDeLacteos(indexLacteo);

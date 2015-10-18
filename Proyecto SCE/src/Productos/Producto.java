@@ -1,58 +1,63 @@
-        package Aplicacion;
+package Productos;
 
 public abstract class Producto {
-    private int index;
+    private int    index;
     private String tipoDeProducto;
+
     public Producto(int id) {
         setIndex(id);
-        tipoDeProducto=setTipoDeProducto(getIndex());
+        tipoDeProducto = setTipoDeProducto(getIndex());
     }
+
     public String getTipoDeProducto() {
         return tipoDeProducto;
     }
+
     public String setTipoDeProducto(int idx) {
         switch (idx) {
         case 1:
-            tipoDeProducto="Frituras";
+            tipoDeProducto = "Frituras";
             break;
         case 2:
-            tipoDeProducto="Bebidas";
+            tipoDeProducto = "Bebidas";
             break;
         case 3:
-            tipoDeProducto="Lacteos";
+            tipoDeProducto = "Lacteos";
             break;
         case 4:
-            tipoDeProducto="Helados";
+            tipoDeProducto = "Helados";
             break;
         case 5:
-            tipoDeProducto="Dulces";
+            tipoDeProducto = "Golosinas";
             break;
         case 6:
-            tipoDeProducto="Preparado";
+            tipoDeProducto = "Preparado";
             break;
         case 7:
-            tipoDeProducto="Cafe";
+            tipoDeProducto = "Cafe";
             break;
         case 8:
-            tipoDeProducto="Paquete del dia";
+            tipoDeProducto = "Paquete del dia";
             break;
 
-
         default:
-            tipoDeProducto="Preparado";
+            tipoDeProducto = "Preparado";
             break;
         }
         return tipoDeProducto;
     }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("\ntipo de producto:\n"+tipoDeProducto);
+        builder.append("\ntipo de producto:\n" + tipoDeProducto);
         return builder.toString();
 
     }
+
     public int getIndex() {
         return index;
     }
+
     public void setIndex(int index) {
         this.index = index;
     }
