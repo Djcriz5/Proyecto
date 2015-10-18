@@ -39,9 +39,12 @@ public class probador {
         v.add(yogurt);
         v.add(moyo);
         v.add(paquete);
-        v.add(dulce);
         Orden ris = new Orden(v);
+        ris.addProductos(dulce);
         System.out.println("/////TOTAL////////////");
+        System.out.println(ris);
+        ris.removeProductos(moyo);// arreglar
+        System.out.println("/////Despues////////////");
         System.out.println(ris);
     }
 
