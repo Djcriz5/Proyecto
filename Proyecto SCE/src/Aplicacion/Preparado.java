@@ -133,6 +133,9 @@ public class Preparado extends Producto {
     public double getPrecio() {
         return precio;
     }
+    public int getIndex(){
+        return indexPreparado;
+    }
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (FlagGuisadoDeldia != 0) {

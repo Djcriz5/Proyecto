@@ -107,6 +107,10 @@ public class Bebida extends Producto {
         disponibilidad = setDisponibilidad();
         
     }
+    public void bebidaRandom(){
+        int seleccion = (int) (Math.random() * 10+1);
+        setBebida(seleccion);
+    }
     public double getPrecio() {
         return precio;
     }

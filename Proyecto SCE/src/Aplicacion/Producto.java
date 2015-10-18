@@ -4,8 +4,8 @@ public abstract class Producto {
     private int index;
     private String tipoDeProducto;
     public Producto(int id) {
-        index=id;
-        tipoDeProducto=setTipoDeProducto(index);
+        setIndex(id);
+        tipoDeProducto=setTipoDeProducto(getIndex());
     }
     public String getTipoDeProducto() {
         return tipoDeProducto;
@@ -31,14 +31,15 @@ public abstract class Producto {
             tipoDeProducto="Preparado";
             break;
         case 7:
-            tipoDeProducto="Paquete del dia";
+            tipoDeProducto="Cafe";
             break;
         case 8:
-            tipoDeProducto="Cafe";
+            tipoDeProducto="Paquete del dia";
             break;
 
 
         default:
+            tipoDeProducto="Preparado";
             break;
         }
         return tipoDeProducto;
@@ -48,5 +49,11 @@ public abstract class Producto {
         builder.append("\ntipo de producto:\n"+tipoDeProducto);
         return builder.toString();
 
+    }
+    public int getIndex() {
+        return index;
+    }
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

@@ -22,6 +22,8 @@ public class probador {
         System.out.println(moyo);
         moyo.setHelado(1);
         System.out.println(moyo);
+        PaqueteDelDia paquete = new PaqueteDelDia();
+        System.out.println(paquete);
 
     }
 
