@@ -57,6 +57,9 @@ public class PaqueteDelDia extends Producto implements IContable {
         seleccion=0;
         return guarnicion;
     }
+    public void setGuarnicion(int cual){
+        guarnicion=guarniciones[cual];
+    }
 
     public String getGuarnicion() {
         return guarnicion;

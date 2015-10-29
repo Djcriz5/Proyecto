@@ -2,39 +2,35 @@ package Aplicacion;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Random;
 
 import Productos.IContable;
 import Productos.Producto;
 
 public class Orden {
     private LinkedList<Producto> lista;
-    private long                 numeroDeOrden;
+    private String               idOrden;
     private double               precio;
     private boolean              confirmacion;
     private String               cheque;
+    private int                  numeroDeProductos;
 
     public Orden(LinkedList<Producto> L) {
-        // setNumeroDeOrden(numOrden);
         lista = L;
+        setIdOrden(getId());
         precio = setPrecio(lista);
         cheque = getCheque(lista);
-        confirmacion=setConfirmacion();
+        confirmacion = setConfirmacion();
+        numeroDeProductos = getNumeroDeProductos();
 
     }
 
     public Orden() {
         lista = new LinkedList<Producto>();
+        setIdOrden(getId());
         precio = setPrecio(lista);
         cheque = getCheque(lista);
-        confirmacion=setConfirmacion();
-    }
-
-    public long getNumeroDeOrden() {
-        return numeroDeOrden;
-    }
-
-    public void setNumeroDeOrden(long numeroDeOrden) {
-        this.numeroDeOrden = numeroDeOrden;
+        confirmacion = setConfirmacion();
     }
 
     public double getPrecio() {
@@ -68,7 +64,7 @@ public class Orden {
     public void addProductos(Producto e) {
         precio = 0;
         cheque = "";
-        lista.push(e);
+        lista.add(e);
         precio = setPrecio(lista);
         cheque = getCheque(lista);
     }
@@ -80,19 +76,55 @@ public class Orden {
         precio = setPrecio(lista);
         cheque = getCheque(lista);
     }
-    public boolean setConfirmacion(){
-        return(lista.size()!=0);
+
+    public boolean setConfirmacion() {
+        return (lista != null);
     }
+
+    public int getNumeroDeProductos() {
+
+        numeroDeProductos = lista.size();
+        return numeroDeProductos;
+    }
+
+    private String getId() {
+        int longitud = (int) (Math.random() * 10) + 1;
+        ;
+        String cadenaAleatoria = "";
+        long milis = new java.util.GregorianCalendar().getTimeInMillis();
+        Random r = new Random(milis);
+        int i = 0;
+        while (i < longitud) {
+            char c = (char) r.nextInt(255);
+            if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')) {
+                cadenaAleatoria += c;
+                i++;
+            }
+        }
+        return cadenaAleatoria;
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        if(confirmacion){
-        builder.append("\n Cheque:" + cheque);
-        builder.append("\nel precio de la orden es de : $" + precio);}
-        else{
+        if (confirmacion) {
+            builder.append("\nSistema de Cafeteria Escom");
+            builder.append("\nIdentificacion de Orden:" + idOrden);
+            builder.append("\nCheque:" + cheque);
+            builder.append("\nNumero de Productos:" + numeroDeProductos);
+            builder.append("\nel precio de la orden es de : $" + precio);
+        } else {
             builder.append("Orden  errorea intente otra ves");
         }
         return builder.toString();
 
+    }
+
+    public void setIdOrden(String id) {
+        idOrden = id;
+    }
+
+    public String getIdOrden() {
+        return idOrden;
     }
 
 }
