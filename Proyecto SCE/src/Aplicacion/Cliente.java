@@ -38,16 +38,41 @@ public class Cliente {
             break;
         case "Paquete del dia":
             if (idx == 0) {
-                p = new Lacteo();
+                p = new PaqueteDelDia();
             } else {
-                p = new Lacteo(idx);
+                p = new PaqueteDelDia(idx);
             }
             break;
         case "Preparado":
-
+            p = new Preparado(idx);
             break;
-
         default:
+            break;
+        }
+        return p;
+    }
+
+    public Producto getProducto(String cual, int idx, int es) {
+        Producto p = null;
+        switch (cual) {
+        case "Paquete del dia":
+            if (idx == 0) {
+                p = new PaqueteDelDia();
+            } else if (es == 0) {
+                p = new PaqueteDelDia(idx);
+            } else {
+                p = new PaqueteDelDia(idx, es);
+            }
+            break;
+        case "Preparado":
+            if (es == 0) {
+                p = new Preparado(idx);
+            } else {
+                p = new Preparado(idx, es);
+            }
+            break;
+        default:
+            System.out.println("lo sentimos esos porductos no se pueden personalizar");
             break;
         }
         return p;
@@ -57,7 +82,7 @@ public class Cliente {
         if (numeroTargeta != 0) {
             if (credito > 0) {
                 pedido.addProductos(e);
-                credito-=pedido.getPrecio();
+                credito -= pedido.getPrecio();
             } else {
                 System.out.println("lo sentimos credito ecxedido");
             }
