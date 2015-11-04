@@ -12,6 +12,5 @@ public class ProbadorCliente {
         pancho.setNumeroTargeta(219891273);
         pancho.comprar(pancho.getProducto("Lacteo", 1));
         System.out.println(pancho);
-        System.out.println("hola mundo soysa");
     }
 }
