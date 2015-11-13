@@ -1,5 +1,6 @@
 package Aplicacion;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
@@ -7,7 +8,7 @@ import java.util.Random;
 import Productos.IContable;
 import Productos.Producto;
 
-public class Orden {
+public class Orden implements Serializable {
     private LinkedList<Producto> lista;
     private String               idOrden;
     private double               precio;

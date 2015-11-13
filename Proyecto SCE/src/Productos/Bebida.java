@@ -1,6 +1,12 @@
 package Productos;
 
-public class Bebida extends Producto implements IContable{
+import java.io.Serializable;
+
+public class Bebida extends Producto implements IContable,Serializable{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1204478226960898358L;
     int     indexBebida;
     String  tipoDeBebida;
     double  precio;

@@ -1,8 +1,14 @@
 package Aplicacion;
 
+import java.io.Serializable;
+
 import Productos.*;
 
-public class Cliente {
+public class Cliente implements Serializable{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1175933602200894458L;
     private String nombre;
     private long   numeroTargeta;
     private String password;

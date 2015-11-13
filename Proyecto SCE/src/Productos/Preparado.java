@@ -1,7 +1,13 @@
 package Productos;
 
-public class Preparado extends Producto implements IContable{
-   private IngredienteEspecial extra;
+import java.io.Serializable;
+
+public class Preparado extends Producto implements IContable,Serializable{
+   /**
+     * 
+     */
+    private static final long serialVersionUID = -8314460045236646718L;
+private IngredienteEspecial extra;
    private int                 indexPreparado;
    private String              tipoDePreparado;
    private double              precio;

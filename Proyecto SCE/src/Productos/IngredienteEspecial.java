@@ -1,6 +1,12 @@
 package Productos;
 
-public class IngredienteEspecial {
+import java.io.Serializable;
+
+public class IngredienteEspecial implements Serializable{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6622215012398760316L;
     private int     index;
     private String  tipo;
     double  precioIngrediente;

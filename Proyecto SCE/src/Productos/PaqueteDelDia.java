@@ -1,6 +1,12 @@
 package Productos;
 
-public class PaqueteDelDia extends Producto implements IContable {
+import java.io.Serializable;
+
+public class PaqueteDelDia extends Producto implements IContable,Serializable  {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1201998190548038058L;
     private Preparado platofuerte;
     private String[] guarniciones={"Arroz","Sopa","spaguetti","frijoles"};
     private Bebida    bebidaPaquete;
