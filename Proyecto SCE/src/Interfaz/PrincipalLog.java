@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 public class PrincipalLog {
     private ArrayList<Cliente> listaDeClientes = new ArrayList<Cliente>();;
     private ArrayList<Cliente> dbClientes      = listaDeClientes;
-    private JFrame             frame;
+    public JFrame             frame;
     private JDesktopPane       desktopPane;
     private ImageIcon          icono;
     private ImageIcon          iconoaux;
@@ -42,23 +42,6 @@ public class PrincipalLog {
     private ObjectContainer    baseDeDatos     = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(),
             "clientes.db4o");
 
-    /**
-     * Clase principal se encarga de leer la base de datos de clietes y de
-     * gestionar las demasfunciones de la aplicacion
-     */
-    public static void main(String[] args) {
-        PrincipalLog window = new PrincipalLog();
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                
-            }
-        });
-    }
 
     /**
      * Create the application.
