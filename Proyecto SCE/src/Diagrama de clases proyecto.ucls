@@ -3,7 +3,7 @@
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="Productos.Golosina" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Productos/Golosina.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="356" width="231" x="631" y="1821"/>    
+    <position height="356" width="231" x="678" y="1821"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="Productos.Preparado" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Productos/Preparado.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="396" width="244" x="42" y="2277"/>    
+    <position height="-1" width="-1" x="100" y="2489"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="Productos.PaqueteDelDia" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Productos/PaqueteDelDia.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="416" width="223" x="82" y="1821"/>    
+    <position height="416" width="223" x="129" y="1821"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="Productos.IngredienteEspecial" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Productos/IngredienteEspecial.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="356" width="218" x="42" y="2713"/>    
+    <position height="-1" width="-1" x="523" y="2823"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="Productos.Helado" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Productos/Helado.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="336" width="219" x="902" y="1821"/>    
+    <position height="336" width="219" x="949" y="1821"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <interface id="6" language="java" name="Productos.IContable" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Productos/IContable.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="782" y="2561"/>    
+    <position height="-1" width="-1" x="840" y="2390"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </interface>  
   <class id="7" language="java" name="Productos.Producto" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Productos/Producto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="256" width="232" x="326" y="1525"/>    
+    <position height="256" width="232" x="373" y="1525"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="Productos.Bebida" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Productos/Bebida.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="376" width="220" x="347" y="2277"/>    
+    <position height="-1" width="-1" x="552" y="2420"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="Productos.Lacteo" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Productos/Lacteo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="336" width="225" x="366" y="1821"/>    
+    <position height="336" width="225" x="413" y="1821"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="Interfaz.Sugerencias" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Interfaz/Sugerencias.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="236" width="226" x="51" y="37"/>    
+    <position height="-1" width="-1" x="314" y="830"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="Interfaz.Quejas" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Interfaz/Quejas.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="376" width="326" x="716" y="37"/>    
+    <position height="-1" width="-1" x="1081" y="739"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="Interfaz.PrincipalLog" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Interfaz/PrincipalLog.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="476" y="145"/>    
+    <position height="-1" width="-1" x="721" y="718"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -111,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="Aplicacion.Cliente" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Aplicacion/Cliente.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="513" y="816"/>    
+    <position height="-1" width="-1" x="714" y="1258"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -120,7 +120,7 @@
   </class>  
   <class id="14" language="java" name="Aplicacion.Orden" project="Proyecto SCE" 
     file="/Proyecto SCE/src/Aplicacion/Orden.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="441" y="1240"/>    
+    <position height="-1" width="-1" x="170" y="1251"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -129,7 +129,7 @@
   </class>  
   <class id="15" language="java" name="dataBase.dbClientes" project="Proyecto SCE" 
     file="/Proyecto SCE/src/dataBase/dbClientes.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="505" y="442"/>    
+    <position height="-1" width="-1" x="337" y="574"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -137,12 +137,12 @@
     </display>  
   </class>  
   <realization id="16">    
-    <bendpoint x="597" y="2277"/>    
+    <bendpoint x="623" y="2277"/>    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
   <realization id="17">    
-    <bendpoint x="316" y="2277"/>    
+    <bendpoint x="342" y="2277"/>    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
@@ -155,7 +155,7 @@
     <end type="TARGET" refId="7"/>  
   </generalization>  
   <generalization id="20">    
-    <bendpoint x="335" y="1821"/>    
+    <bendpoint x="382" y="1821"/>    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="7"/>  
   </generalization>  
@@ -166,7 +166,7 @@
   <association id="22">    
     <end type="SOURCE" refId="12" navigable="false">      
       <attribute id="23" name="dbClientes">        
-        <position height="22" width="84" x="521" y="504"/>      
+        <position height="22" width="84" x="572" y="990"/>      
       </attribute>      
       <multiplicity id="24" minimum="0" maximum="2147483647"/>    
     </end>    
@@ -206,7 +206,7 @@
     <end type="TARGET" refId="7"/>  
   </generalization>  
   <realization id="36">    
-    <bendpoint x="754" y="2277"/>    
+    <bendpoint x="790" y="2277"/>    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
@@ -221,7 +221,7 @@
   <association id="40">    
     <end type="SOURCE" refId="12" navigable="false">      
       <attribute id="41" name="listaDeClientes">        
-        <position height="22" width="115" x="323" y="511"/>      
+        <position height="22" width="115" x="374" y="997"/>      
       </attribute>      
       <multiplicity id="42" minimum="0" maximum="2147483647"/>    
     </end>    
@@ -233,12 +233,12 @@
     <end type="TARGET" refId="7"/>  
   </generalization>  
   <realization id="44">    
-    <bendpoint x="618" y="2277"/>    
+    <bendpoint x="655" y="2277"/>    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
   <generalization id="45">    
-    <bendpoint x="51" y="1821"/>    
+    <bendpoint x="98" y="1821"/>    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="7"/>  
   </generalization>  
