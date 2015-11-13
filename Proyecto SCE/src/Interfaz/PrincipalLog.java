@@ -5,8 +5,6 @@ import java.awt.Image;
 
 import javax.swing.JFrame;
 import java.awt.Color;
-import java.awt.Dimension;
-
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,10 +12,10 @@ import javax.swing.ImageIcon;
 import java.awt.Rectangle;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
 import Aplicacion.Cliente;
-
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -41,22 +39,23 @@ public class PrincipalLog {
     private JButton            btnSingUp;
     private JLabel             Mensaje;
     private JButton            btnSingIn;
+    private ObjectContainer    baseDeDatos     = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(),
+            "clientes.db4o");
 
     /**
-     * Clase principal se encarga de 
-     * leer la base de datos de clietes y 
-     * de gestionar las demasfunciones de 
-     * la aplicacion
+     * Clase principal se encarga de leer la base de datos de clietes y de
+     * gestionar las demasfunciones de la aplicacion
      */
     public static void main(String[] args) {
+        PrincipalLog window = new PrincipalLog();
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    PrincipalLog window = new PrincipalLog();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                
             }
         });
     }
@@ -72,7 +71,11 @@ public class PrincipalLog {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        listaDeClientes = new ArrayList<>();
+        try {
+            dbClientes = consultarQBEPonentesNombre(baseDeDatos, dbClientes);
+        } catch (Exception e) {
+            System.out.println("error al leer base de datos");
+        }
         frame = new JFrame();
         frame.setSize(900, 700);
         frame.setResizable(false);
@@ -140,8 +143,8 @@ public class PrincipalLog {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Usuario no registrado verifique datos" ); 
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario no registrado verifique datos");
                 }
             }
         });
@@ -163,11 +166,43 @@ public class PrincipalLog {
         }
         return buscado;
     }
-    public void addCliente(String nom,String pass){
-        if(buscarCliente(nom, pass)==null){
+
+    public void addCliente(String nom, String pass) {
+        if (buscarCliente(nom, pass) == null) {
             dbClientes.add(new Cliente(nom, pass, 0, 0));
-        }else{
-            JOptionPane.showMessageDialog(null, "Usuario registrado escoja otro usuario" );
+            try {
+                almacenarEnBaseD(baseDeDatos, dbClientes);
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario registrado escoja otro usuario");
         }
+    }
+
+    public static void cerrarConexion(ObjectContainer baseDatos) {
+        try {
+            baseDatos.close();
+        } catch (Exception e) {
+            System.out.println("error al cerrar la conexion");
+        }
+    }
+
+    public ObjectContainer getBaseDeDatos() {
+        return baseDeDatos;
+    }
+
+    public static void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
+        try {
+            baseDatos.store(listaCliente);
+            System.out.println("Se ha almacenado correctamente en la base de datos");
+        } catch (Exception e) {
+            System.out.println("Se ha porducido un error en la insercion");
+        }
+    }
+
+    public ArrayList<Cliente> consultarQBEPonentesNombre(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
+        ObjectSet resultado = baseDatos.queryByExample(listaCliente);
+        return (ArrayList<Cliente>) resultado.next();
     }
 }
