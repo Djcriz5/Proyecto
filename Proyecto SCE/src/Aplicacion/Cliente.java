@@ -1,7 +1,9 @@
 package Aplicacion;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import Interfaz.TicketDeCompra;
 import Productos.*;
 
 public class Cliente implements Serializable{
@@ -14,6 +16,7 @@ public class Cliente implements Serializable{
     private String password;
     private Orden  pedido;
     private double credito;
+    private ArrayList<TicketDeCompra> ticketsDeCompra;
 
     public Cliente(String name, String pass, long num, double saldo) {
         nombre = name;
@@ -21,10 +24,14 @@ public class Cliente implements Serializable{
         numeroTargeta = num;
         credito = saldo;
         pedido = new Orden();
+        ticketsDeCompra=new ArrayList<TicketDeCompra>();
     }
 
     public Cliente() {
         this("", "", 0, 800);
+    }
+    public Cliente(String nombre,String pass){
+        this(nombre,pass,0,0);
     }
 
     public Producto getProducto(String cual, int idx) {
@@ -126,8 +133,9 @@ public class Cliente implements Serializable{
         return pedido;
     }
 
-    public void setPedido(Orden pedido) {
+    public Orden setPedido(Orden pedido) {
         this.pedido = pedido;
+        return this.pedido;
     }
 
     public double getCredito() {
@@ -150,6 +158,14 @@ public class Cliente implements Serializable{
             builder.append("\n" + pedido);
         }
         return builder.toString();
+    }
+
+    public ArrayList<TicketDeCompra> getTicketsDeCompra() {
+        return ticketsDeCompra;
+    }
+
+    public void addTickets(TicketDeCompra o) {
+        ticketsDeCompra.add(o);
     }
 
 }

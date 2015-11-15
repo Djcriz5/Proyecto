@@ -74,6 +74,9 @@ private IngredienteEspecial extra;
         case 9:
             tipoDePreparado = "Guisado Del dia";
             break;
+        case 10:
+            tipoDePreparado = "Sushi";
+            break;
         default:
             indexPreparado = 0;
             tipoDePreparado = " no especificado";
@@ -113,6 +116,9 @@ private IngredienteEspecial extra;
             break;
         case "Guisado Del dia":
             precio = 11.00;
+            break;
+        case "Sushi":
+            precio = 15.00;
             break;
         default:
             indexPreparado = 0;

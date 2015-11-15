@@ -22,11 +22,14 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class PrincipalLog {
     private ArrayList<Cliente> listaDeClientes = new ArrayList<Cliente>();;
     private ArrayList<Cliente> dbClientes      = listaDeClientes;
-    public JFrame             frame;
+    public JFrame              frame;
     private JDesktopPane       desktopPane;
     private ImageIcon          icono;
     private ImageIcon          iconoaux;
@@ -39,9 +42,11 @@ public class PrincipalLog {
     private JButton            btnSingUp;
     private JLabel             Mensaje;
     private JButton            btnSingIn;
+    private VentanaDeCompras   shop;
     private ObjectContainer    baseDeDatos     = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(),
             "clientes.db4o");
-
+    private JTextField         txtRepostargeta;
+    private JRadioButton       rdbtnAadirTargeta;
 
     /**
      * Create the application.
@@ -55,9 +60,11 @@ public class PrincipalLog {
      */
     private void initialize() {
         try {
-            dbClientes = consultarQBEPonentesNombre(baseDeDatos, dbClientes);
+            dbClientes = consultarBaseDeDatos(baseDeDatos, dbClientes);
+            System.out.println("Base de datos sincronizada");
         } catch (Exception e) {
             System.out.println("error al leer base de datos");
+
         }
         frame = new JFrame();
         frame.setSize(900, 700);
@@ -102,7 +109,7 @@ public class PrincipalLog {
 
         btnSingUp = new JButton("Sing Up");
         btnSingUp.setBackground(new Color(65, 105, 225));
-        btnSingUp.setBounds(253, 218, 115, 29);
+        btnSingUp.setBounds(253, 246, 115, 29);
         internalLogin.getContentPane().add(btnSingUp);
 
         Mensaje = new JLabel("Ya tienes una cuenta?");
@@ -114,6 +121,30 @@ public class PrincipalLog {
         btnSingIn.setBackground(new Color(65, 105, 225));
         btnSingIn.setBounds(253, 291, 115, 29);
         internalLogin.getContentPane().add(btnSingIn);
+
+        rdbtnAadirTargeta = new JRadioButton("Añadir targeta");
+        rdbtnAadirTargeta.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                if (rdbtnAadirTargeta.isSelected()) {
+                    txtRepostargeta.setBackground(Color.white);
+                    txtRepostargeta.setEnabled(true);
+                }else{
+                    txtRepostargeta.setBackground(Color.DARK_GRAY);
+                    txtRepostargeta.setEnabled(false);
+                }
+            }
+        });
+        rdbtnAadirTargeta.setForeground(Color.WHITE);
+        rdbtnAadirTargeta.setBackground(Color.DARK_GRAY);
+        rdbtnAadirTargeta.setBounds(42, 194, 140, 26);
+        internalLogin.getContentPane().add(rdbtnAadirTargeta);
+        txtRepostargeta =        new JTextField();
+        txtRepostargeta.setEnabled(false);
+        txtRepostargeta.setBorder(null);
+        txtRepostargeta.setBounds(185, 198, 183, 26);
+        txtRepostargeta.setBackground(Color.DARK_GRAY);
+        internalLogin.getContentPane().add(txtRepostargeta);
+        txtRepostargeta.setColumns(10);
         internalLogin.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         btnSingIn.addActionListener(new ActionListener() {
@@ -122,8 +153,12 @@ public class PrincipalLog {
                 if (buscarCliente(reposNombre.getText(), pass) != null) {
                     try {
                         internalLogin.setClosed(true);
+                        shop = new VentanaDeCompras(buscarCliente(reposNombre.getText(), pass), baseDeDatos,
+                                dbClientes);
+                        desktopPane.add(shop);
+                        shop.setVisible(true);
                     } catch (PropertyVetoException e1) {
-                        // TODO Auto-generated catch block
+                        System.out.println("se produjo un error al acceder");
                         e1.printStackTrace();
                     }
                 } else {
@@ -152,18 +187,27 @@ public class PrincipalLog {
 
     public void addCliente(String nom, String pass) {
         if (buscarCliente(nom, pass) == null) {
-            dbClientes.add(new Cliente(nom, pass, 0, 0));
-            try {
-                almacenarEnBaseD(baseDeDatos, dbClientes);
-            } catch (Exception e) {
-                // TODO: handle exception
+            if (rdbtnAadirTargeta.isSelected()) {
+                try {
+                    dbClientes.add(new Cliente(nom, pass, Long.valueOf(txtRepostargeta.getText()), 800));
+                    almacenarEnBaseD(baseDeDatos, dbClientes);
+                } catch (Exception e) {
+                    System.out.println("error al almacenar Cliente");
+                }
+            } else {
+                try {
+                    dbClientes.add(new Cliente(nom, pass));
+                    almacenarEnBaseD(baseDeDatos, dbClientes);
+                } catch (Exception e) {
+                    System.out.println("error al almacenar Cliente");
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Usuario registrado escoja otro usuario");
         }
     }
 
-    public static void cerrarConexion(ObjectContainer baseDatos) {
+    public void cerrarConexion(ObjectContainer baseDatos) {
         try {
             baseDatos.close();
         } catch (Exception e) {
@@ -178,14 +222,19 @@ public class PrincipalLog {
     public static void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
         try {
             baseDatos.store(listaCliente);
+            baseDatos.commit();
             System.out.println("Se ha almacenado correctamente en la base de datos");
         } catch (Exception e) {
             System.out.println("Se ha porducido un error en la insercion");
         }
     }
 
-    public ArrayList<Cliente> consultarQBEPonentesNombre(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
+    public ArrayList<Cliente> consultarBaseDeDatos(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
         ObjectSet resultado = baseDatos.queryByExample(listaCliente);
-        return (ArrayList<Cliente>) resultado.next();
+        return (ArrayList<Cliente>) resultado.get(0);
+    }
+
+    public ArrayList<Cliente> getListaDeClientes() {
+        return dbClientes;
     }
 }

@@ -9,6 +9,11 @@ import Productos.IContable;
 import Productos.Producto;
 
 public class Orden implements Serializable {
+    
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -2657784882927859057L;
     private LinkedList<Producto> lista;
     private String               idOrden;
     private double               precio;

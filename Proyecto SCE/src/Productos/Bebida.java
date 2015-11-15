@@ -23,6 +23,7 @@ public class Bebida extends Producto implements IContable,Serializable{
         disponibilidad = setDisponibilidad();
 
     }
+    
 
     public String setTipoDeBebida(int id) {
 
