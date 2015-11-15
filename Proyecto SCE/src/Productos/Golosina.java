@@ -49,9 +49,9 @@ public class Golosina extends Producto implements IContable,Serializable{
         case 5:
             tipoGolosina = "gansito";
             break;
-        case 7:
+        case 6:
             tipoGolosina = "Carlos XV";
-        case 8:
+        case 7:
             tipoGolosina = "lunetas";
 
         default:

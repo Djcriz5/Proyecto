@@ -85,7 +85,7 @@ public class Cliente implements Serializable{
             }
             break;
         default:
-            System.out.println("lo sentimos esos porductos no se pueden personalizar");
+            System.out.println("lo sentimos esos productos no se pueden personalizar");
             break;
         }
         return p;
@@ -97,7 +97,7 @@ public class Cliente implements Serializable{
                 pedido.addProductos(e);
                 credito -= pedido.getPrecio();
             } else {
-                System.out.println("lo sentimos credito ecxedido");
+                System.out.println("lo sentimos credito excedido");
             }
         } else {
             pedido.addProductos(e);

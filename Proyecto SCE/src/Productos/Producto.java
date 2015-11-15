@@ -2,13 +2,13 @@ package Productos;
 
 import java.io.Serializable;
 
-public abstract class Producto implements Serializable{
+public abstract class Producto implements Serializable {
     /**
      * 
      */
     private static final long serialVersionUID = -2874196855991618490L;
-    private int    index;
-    private String tipoDeProducto;
+    private int               index;
+    private String            tipoDeProducto;
 
     public Producto(int id) {
         setIndex(id);

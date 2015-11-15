@@ -157,6 +157,7 @@ public class PrincipalLog {
                                 dbClientes);
                         desktopPane.add(shop);
                         shop.setVisible(true);
+                        desktopPane.repaint();
                     } catch (PropertyVetoException e1) {
                         System.out.println("se produjo un error al acceder");
                         e1.printStackTrace();

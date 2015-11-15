@@ -2,15 +2,15 @@ package Productos;
 
 import java.io.Serializable;
 
-public class IngredienteEspecial implements Serializable{
+public class IngredienteEspecial implements Serializable {
     /**
      * 
      */
     private static final long serialVersionUID = -6622215012398760316L;
-    private int     index;
-    private String  tipo;
-    double  precioIngrediente;
-    boolean disponibilidad;
+    private int               index;
+    private String            tipo;
+    double                    precioIngrediente;
+    boolean                   disponibilidad;
 
     public IngredienteEspecial() {
         this(0);
@@ -19,8 +19,8 @@ public class IngredienteEspecial implements Serializable{
     public IngredienteEspecial(int cual) {
         setIndex(cual);
         setTipo(index);
-        precioIngrediente=setPrecio(getTipo());
-        disponibilidad=setDisponibilidad();
+        precioIngrediente = setPrecio(getTipo());
+        disponibilidad = setDisponibilidad();
 
     }
 
@@ -42,17 +42,17 @@ public class IngredienteEspecial implements Serializable{
             tipo = "Aderezos";
             break;
         case 6:
-            tipo = "caramelo";
+            tipo = "Guacamole";
             break;
         case 7:
-            tipo = "miel";
+            tipo = "BBq";
             break;
         case 8:
-            tipo = "chocolate";
+            tipo = "Wasabi";
             break;
         case 0:
-            tipo="no ingrediente extra";
-            
+            tipo = "no ingrediente extra";
+
             break;
         }
         return tipo;
@@ -61,42 +61,46 @@ public class IngredienteEspecial implements Serializable{
     private double setPrecio(String cual) {
         switch (cual) {
         case "jamon extra":
-            precioIngrediente=7.50;
+            precioIngrediente = 7.50;
 
             break;
         case "Pechuga de pavo":
-            precioIngrediente=9.50;
+            precioIngrediente = 9.50;
             break;
         case "queso extra":
-            precioIngrediente=7.50;
+            precioIngrediente = 7.50;
+            break;
+        case "Aguacate":
+            precioIngrediente = 5.00;
             break;
         case "Aderezos":
-            precioIngrediente=3.75;
+            precioIngrediente = 3.75;
             break;
-        case "caramelo":
-            precioIngrediente=3.25;
+        case "Guacamole":
+            precioIngrediente = 3.25;
             break;
-        case "miel":
-            precioIngrediente=4.55;
+        case "BBq":
+            precioIngrediente = 4.55;
             break;
-        case "chocolate":
-            precioIngrediente=5.55;
-
-            break;
+        case "Wasabi":
+            precioIngrediente = 5.55;
         default:
-            precioIngrediente=0;
+            precioIngrediente = 0;
             break;
         }
         return precioIngrediente;
     }
-    private boolean setDisponibilidad(){
-      return(getIndex()!=0); 
+
+    private boolean setDisponibilidad() {
+        return (getIndex() != 0);
     }
-    public double getPrecio(){
+
+    public double getPrecio() {
         return precioIngrediente;
     }
-    public void setIndex(int cual){
-        index=cual;
+
+    public void setIndex(int cual) {
+        index = cual;
         setTipo(cual);
     }
 
@@ -107,5 +111,5 @@ public class IngredienteEspecial implements Serializable{
     public String getTipo() {
         return tipo;
     }
-    
+
 }
