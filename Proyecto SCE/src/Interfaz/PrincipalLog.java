@@ -12,6 +12,8 @@ import javax.swing.ImageIcon;
 import java.awt.Rectangle;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -60,6 +62,12 @@ public class PrincipalLog {
      */
     private void initialize() {
         try {
+            frame.setDefaultLookAndFeelDecorated(true);
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar cargar L&F");
+        }
+        try {
             dbClientes = consultarBaseDeDatos(baseDeDatos, dbClientes);
             System.out.println("Base de datos sincronizada");
         } catch (Exception e) {
@@ -83,6 +91,7 @@ public class PrincipalLog {
         desktopPane.add(lblNewLabel);
 
         internalLogin = new JInternalFrame("Login");
+        internalLogin.getContentPane().setBackground(Color.DARK_GRAY);
         internalLogin.setBackground(Color.DARK_GRAY);
         internalLogin.setBounds(184, 145, 489, 422);
         desktopPane.add(internalLogin);
@@ -94,6 +103,7 @@ public class PrincipalLog {
         reposNombre.setColumns(10);
 
         lblUsuario = new JLabel("Usuario");
+        lblUsuario.setBackground(Color.WHITE);
         lblUsuario.setForeground(Color.WHITE);
         lblUsuario.setBounds(70, 97, 85, 23);
         internalLogin.getContentPane().add(lblUsuario);
@@ -103,6 +113,7 @@ public class PrincipalLog {
         internalLogin.getContentPane().add(passwordField);
 
         lblContrasena = new JLabel("Password");
+        lblContrasena.setBackground(Color.WHITE);
         lblContrasena.setForeground(Color.WHITE);
         lblContrasena.setBounds(70, 159, 85, 23);
         internalLogin.getContentPane().add(lblContrasena);
@@ -113,6 +124,7 @@ public class PrincipalLog {
         internalLogin.getContentPane().add(btnSingUp);
 
         Mensaje = new JLabel("Ya tienes una cuenta?");
+        Mensaje.setBackground(Color.WHITE);
         Mensaje.setForeground(Color.WHITE);
         Mensaje.setBounds(70, 294, 162, 23);
         internalLogin.getContentPane().add(Mensaje);
@@ -126,10 +138,10 @@ public class PrincipalLog {
         rdbtnAadirTargeta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if (rdbtnAadirTargeta.isSelected()) {
-                    txtRepostargeta.setBackground(Color.white);
+                    txtRepostargeta.setVisible(true);
                     txtRepostargeta.setEnabled(true);
-                }else{
-                    txtRepostargeta.setBackground(Color.DARK_GRAY);
+                } else {
+                    txtRepostargeta.setVisible(false);
                     txtRepostargeta.setEnabled(false);
                 }
             }
@@ -138,11 +150,12 @@ public class PrincipalLog {
         rdbtnAadirTargeta.setBackground(Color.DARK_GRAY);
         rdbtnAadirTargeta.setBounds(42, 194, 140, 26);
         internalLogin.getContentPane().add(rdbtnAadirTargeta);
-        txtRepostargeta =        new JTextField();
+        txtRepostargeta = new JTextField();
+        txtRepostargeta.setVisible(false);
         txtRepostargeta.setEnabled(false);
         txtRepostargeta.setBorder(null);
         txtRepostargeta.setBounds(185, 198, 183, 26);
-        txtRepostargeta.setBackground(Color.DARK_GRAY);
+        txtRepostargeta.setBackground(Color.WHITE);
         internalLogin.getContentPane().add(txtRepostargeta);
         txtRepostargeta.setColumns(10);
         internalLogin.setVisible(true);
@@ -152,11 +165,17 @@ public class PrincipalLog {
                 String pass = new String(passwordField.getPassword());
                 if (buscarCliente(reposNombre.getText(), pass) != null) {
                     try {
+                        /*
+                         * shop = new
+                         * VentanaDeCompras(buscarCliente(reposNombre.getText(),
+                         * pass), baseDeDatos, dbClientes);
+                         * desktopPane.add(shop); shop.setVisible(true);
+                         */
+                        VentanaUsuario vu = new VentanaUsuario(buscarCliente(reposNombre.getText(), pass), baseDeDatos,
+                                dbClientes, PrincipalLog.this);
+                        desktopPane.add(vu);
+                        vu.setVisible(true);
                         internalLogin.setClosed(true);
-                        shop = new VentanaDeCompras(buscarCliente(reposNombre.getText(), pass), baseDeDatos,
-                                dbClientes);
-                        desktopPane.add(shop);
-                        shop.setVisible(true);
                         desktopPane.repaint();
                     } catch (PropertyVetoException e1) {
                         System.out.println("se produjo un error al acceder");
@@ -237,5 +256,9 @@ public class PrincipalLog {
 
     public ArrayList<Cliente> getListaDeClientes() {
         return dbClientes;
+    }
+
+    public JDesktopPane getDesktopPane() {
+        return desktopPane;
     }
 }

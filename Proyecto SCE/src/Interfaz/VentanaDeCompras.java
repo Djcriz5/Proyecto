@@ -26,6 +26,8 @@ import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class VentanaDeCompras extends JInternalFrame {
     /**
@@ -59,17 +61,20 @@ public class VentanaDeCompras extends JInternalFrame {
     private JRadioButton      rdbtnIngredienteExtra;
     private JComboBox<String> cbPreparado;
     private JButton           btnConfirmarPreparado;
-    private JButton           btnConfirmarCompra;
+    private JLabel            lblLblconfirmar;
+    private ImageIcon         iconoConfirmar;
+    private JLabel            lblLabelhome;
+    private ImageIcon         iconoHome;
 
     /**
      * Create the frame.
      */
-    public VentanaDeCompras(Cliente uncliente, ObjectContainer oC, ArrayList<Cliente> dbC) {
+    public VentanaDeCompras(Cliente uncliente, ObjectContainer oC, ArrayList<Cliente> dbC, PrincipalLog p) {
         getContentPane().setBackground(Color.DARK_GRAY);
         getContentPane().setLayout(null);
         // variables bebida
         lblBebida = new JLabel("Bebida");
-        lblBebida.setBounds(98, 21, 105, 105);
+        lblBebida.setBounds(55, 21, 105, 105);
         getContentPane().add(lblBebida);
         iconoBebida = new ImageIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/bebidaicon.png"))
                 .getImage().getScaledInstance(lblBebida.getWidth(), lblBebida.getHeight(), Image.SCALE_DEFAULT));
@@ -77,7 +82,7 @@ public class VentanaDeCompras extends JInternalFrame {
         getContentPane().add(lblBebida);
         cbBebida = new JComboBox<String>();
         cbBebida.setBackground(Color.WHITE);
-        cbBebida.setBounds(88, 135, 115, 26);
+        cbBebida.setBounds(45, 135, 115, 26);
         cbBebida.addItem("coca cola");
         cbBebida.addItem("Sprite");
         cbBebida.addItem("Nestea");
@@ -98,18 +103,18 @@ public class VentanaDeCompras extends JInternalFrame {
         });
         btnConfirmarBebida.setBackground(new Color(30, 144, 255));
         btnConfirmarBebida.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
-        btnConfirmarBebida.setBounds(218, 124, 42, 37);
+        btnConfirmarBebida.setBounds(175, 124, 42, 37);
         getContentPane().add(btnConfirmarBebida);
         // variables golosina
         lblGolosina = new JLabel("Golosina");
-        lblGolosina.setBounds(351, 16, 115, 115);
+        lblGolosina.setBounds(312, 16, 115, 115);
         iconoGolosina = new ImageIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/candyicon.png"))
                 .getImage().getScaledInstance(lblBebida.getWidth(), lblBebida.getHeight(), Image.SCALE_DEFAULT));
         lblGolosina.setIcon(iconoGolosina);
         getContentPane().add(lblGolosina);
         cbGolosina = new JComboBox<String>();
         cbGolosina.setBackground(Color.WHITE);
-        cbGolosina.setBounds(351, 135, 115, 26);
+        cbGolosina.setBounds(312, 135, 115, 26);
         cbGolosina.addItem("Paleta");
         cbGolosina.addItem("Gomitas");
         cbGolosina.addItem("KitKat");
@@ -128,11 +133,11 @@ public class VentanaDeCompras extends JInternalFrame {
         });
         btnConfirmarGolosina.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarGolosina.setBackground(new Color(30, 144, 255));
-        btnConfirmarGolosina.setBounds(481, 124, 42, 37);
+        btnConfirmarGolosina.setBounds(442, 124, 42, 37);
         getContentPane().add(btnConfirmarGolosina);
         // variable helado
         lblHelado = new JLabel("Helado");
-        lblHelado.setBounds(98, 172, 115, 115);
+        lblHelado.setBounds(55, 172, 115, 115);
         iconoHelado = new ImageIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/icecreamicon.png"))
                 .getImage().getScaledInstance(lblBebida.getWidth(), lblBebida.getHeight(), Image.SCALE_DEFAULT));
         lblHelado.setIcon(iconoHelado);
@@ -145,7 +150,7 @@ public class VentanaDeCompras extends JInternalFrame {
         cbHelado.addItem("Paleta magnum Almendras");
         cbHelado.addItem("Helado Vainilla");
         cbHelado.addItem("Helado de yogurt Taro");
-        cbHelado.setBounds(88, 295, 115, 26);
+        cbHelado.setBounds(45, 295, 115, 26);
         getContentPane().add(cbHelado);
         btnConfirmarHelado = new JButton("");
         btnConfirmarHelado.addActionListener(new ActionListener() {
@@ -156,19 +161,19 @@ public class VentanaDeCompras extends JInternalFrame {
         });
         btnConfirmarHelado.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarHelado.setBackground(new Color(30, 144, 255));
-        btnConfirmarHelado.setBounds(218, 284, 42, 37);
+        btnConfirmarHelado.setBounds(175, 284, 42, 37);
         getContentPane().add(btnConfirmarHelado);
         // variables Lacteo
 
         lblLacteo = new JLabel("Lacteo");
-        lblLacteo.setBounds(351, 172, 115, 115);
+        lblLacteo.setBounds(312, 177, 115, 115);
         iconoLacteo = new ImageIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/milkicon.png"))
                 .getImage().getScaledInstance(lblBebida.getWidth(), lblBebida.getHeight(), Image.SCALE_DEFAULT));
         lblLacteo.setIcon(iconoLacteo);
         getContentPane().add(lblLacteo);
         cbLacteo = new JComboBox<String>();
         cbLacteo.setBackground(Color.WHITE);
-        cbLacteo.setBounds(351, 295, 115, 26);
+        cbLacteo.setBounds(312, 295, 115, 26);
         cbLacteo.addItem("Griego Yoplait");
         cbLacteo.addItem("Yoplait de fresa");
         cbLacteo.addItem("Yoplait de Manzana");
@@ -185,12 +190,12 @@ public class VentanaDeCompras extends JInternalFrame {
         });
         btnConfirmarLacteo.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarLacteo.setBackground(new Color(30, 144, 255));
-        btnConfirmarLacteo.setBounds(481, 284, 42, 37);
+        btnConfirmarLacteo.setBounds(442, 284, 42, 37);
         getContentPane().add(btnConfirmarLacteo);
-        setBounds(0, 0, 700, 600);
+        setBounds(0, 0, 757, 611);
         // variables paquete del dia
         lblPaqueteDelDia = new JLabel("Paquete del Dia");
-        lblPaqueteDelDia.setBounds(108, 326, 120, 134);
+        lblPaqueteDelDia.setBounds(55, 326, 120, 134);
         iconoPaqueteDelDia = new ImageIcon(
                 new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/paqueteDelDia.png")).getImage()
                         .getScaledInstance(lblBebida.getWidth(), lblBebida.getHeight(), Image.SCALE_DEFAULT));
@@ -208,7 +213,7 @@ public class VentanaDeCompras extends JInternalFrame {
         cbPaqueteDelDia.addItem("Boing uva");
         cbPaqueteDelDia.addItem("Boing manzana");
         cbPaqueteDelDia.addItem("Agua embotellada");
-        cbPaqueteDelDia.setBounds(88, 500, 154, 26);
+        cbPaqueteDelDia.setBounds(55, 500, 154, 26);
         getContentPane().add(cbPaqueteDelDia);
         checkElegirBebida = new JRadioButton("Elegir bebida");
         checkElegirBebida.setBackground(new Color(30, 144, 255));
@@ -223,7 +228,7 @@ public class VentanaDeCompras extends JInternalFrame {
                 }
             }
         });
-        checkElegirBebida.setBounds(88, 459, 155, 29);
+        checkElegirBebida.setBounds(55, 459, 155, 29);
         getContentPane().add(checkElegirBebida);
 
         btnConfirmarPaqueteDelDia = new JButton("");
@@ -241,13 +246,13 @@ public class VentanaDeCompras extends JInternalFrame {
         });
         btnConfirmarPaqueteDelDia.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarPaqueteDelDia.setBackground(new Color(30, 144, 255));
-        btnConfirmarPaqueteDelDia.setBounds(257, 489, 42, 37);
+        btnConfirmarPaqueteDelDia.setBounds(224, 489, 42, 37);
         getContentPane().add(btnConfirmarPaqueteDelDia);
         // variables Preparado
         cbIngredienteEs = new JComboBox<String>();
         cbIngredienteEs.setBackground(new Color(0, 0, 0));
         cbIngredienteEs.setEnabled(false);
-        cbIngredienteEs.setBounds(351, 500, 152, 26);
+        cbIngredienteEs.setBounds(312, 500, 152, 26);
         cbIngredienteEs.addItem("jamon extra");
         cbIngredienteEs.addItem("Pechuga de pavo");
         cbIngredienteEs.addItem("queso extra");
@@ -258,7 +263,7 @@ public class VentanaDeCompras extends JInternalFrame {
         cbIngredienteEs.addItem("Wasabi");
         getContentPane().add(cbIngredienteEs);
         lblPreparado = new JLabel("Preparado");
-        lblPreparado.setBounds(361, 336, 115, 115);
+        lblPreparado.setBounds(312, 337, 115, 115);
         iconoPreparado = new ImageIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/preparadoIcon.png"))
                 .getImage().getScaledInstance(lblBebida.getWidth(), lblBebida.getHeight(), Image.SCALE_DEFAULT));
         lblPreparado.setIcon(iconoPreparado);
@@ -276,7 +281,7 @@ public class VentanaDeCompras extends JInternalFrame {
                 }
             }
         });
-        rdbtnIngredienteExtra.setBounds(351, 459, 155, 29);
+        rdbtnIngredienteExtra.setBounds(312, 459, 155, 29);
         getContentPane().add(rdbtnIngredienteExtra);
         cbPreparado = new JComboBox<String>();
         cbPreparado.addItem("Sandwich");
@@ -289,7 +294,7 @@ public class VentanaDeCompras extends JInternalFrame {
         cbPreparado.addItem("Enchiladas");
         cbPreparado.addItem("Orden de tacos");
         cbPreparado.addItem("Guisado Del dia");
-        cbPreparado.setBounds(517, 460, 152, 26);
+        cbPreparado.setBounds(478, 460, 152, 26);
         getContentPane().add(cbPreparado);
         btnConfirmarPreparado = new JButton("");
         btnConfirmarPreparado.addActionListener(new ActionListener() {
@@ -308,22 +313,48 @@ public class VentanaDeCompras extends JInternalFrame {
         });
         btnConfirmarPreparado.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarPreparado.setBackground(new Color(30, 144, 255));
-        btnConfirmarPreparado.setBounds(517, 489, 42, 37);
+        btnConfirmarPreparado.setBounds(479, 489, 42, 37);
         getContentPane().add(btnConfirmarPreparado);
 
-        btnConfirmarCompra = new JButton("Confirmar Compra");
-        btnConfirmarCompra.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 13));
-        btnConfirmarCompra.setBackground(new Color(255, 255, 0));
-        btnConfirmarCompra.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                almacenarEnBaseD(oC, dbC);
-                getContentPane().removeAll();
-                getContentPane().repaint();
-                getContentPane().add(new TicketDeCompra(uncliente, oC, dbC));
+        lblLblconfirmar = new JLabel("");
+        lblLblconfirmar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent arg0) {
+                try {
+                    almacenarEnBaseD(oC, dbC);
+                    p.getDesktopPane().add(new TicketDeCompra(uncliente, oC, dbC, p));
+                    p.getDesktopPane().repaint();
+                    setClosed(true);
+                } catch (PropertyVetoException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
-        btnConfirmarCompra.setBounds(517, 62, 152, 37);
-        getContentPane().add(btnConfirmarCompra);
+        lblLblconfirmar.setBounds(645, 433, 96, 93);
+        iconoConfirmar = new ImageIcon(
+                new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/check.png")).getImage().getScaledInstance(
+                        lblLblconfirmar.getWidth(), lblLblconfirmar.getHeight(), Image.SCALE_DEFAULT));
+        lblLblconfirmar.setIcon(iconoConfirmar);
+        getContentPane().add(lblLblconfirmar);
+
+        lblLabelhome = new JLabel("");
+        lblLabelhome.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    VentanaUsuario aux = new VentanaUsuario(uncliente, oC, dbC, p);
+                    aux.setVisible(true);
+                    p.getDesktopPane().add(aux);
+                    p.getDesktopPane().repaint();
+                    setClosed(true);
+                } catch (PropertyVetoException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+        lblLabelhome.setBounds(600, 21, 126, 124);
+        iconoHome = new ImageIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/home-icon.png"))
+                .getImage().getScaledInstance(lblLabelhome.getWidth(), lblLabelhome.getHeight(), Image.SCALE_DEFAULT));
+        lblLabelhome.setIcon(iconoHome);
+        getContentPane().add(lblLabelhome);
     }
 
     private int getIndexBebida(String tipo) {
@@ -525,7 +556,6 @@ public class VentanaDeCompras extends JInternalFrame {
 
     public static void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
         try {
-            baseDatos.delete(listaCliente);
             baseDatos.store(listaCliente);
             baseDatos.commit();
             System.out.println("Se ha almacenado correctamente en la base de datos");

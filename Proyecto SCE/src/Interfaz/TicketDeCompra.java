@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class TicketDeCompra extends JInternalFrame {
-    private Orden orden;
-    private String contenido;
-    private JTextArea txtCAS;
+    private Orden             orden;
+    private String            contenido;
+    private JTextArea         txtCAS;
 
     /**
      * 
@@ -34,9 +34,9 @@ public class TicketDeCompra extends JInternalFrame {
     /**
      * Create the frame.
      */
-    public TicketDeCompra(Cliente uncliente,ObjectContainer oC, ArrayList<Cliente> dbC) {
-        contenido=uncliente.toString();
-        orden=uncliente.getPedido();
+    public TicketDeCompra(Cliente uncliente, ObjectContainer oC, ArrayList<Cliente> dbC, PrincipalLog p) {
+        contenido = uncliente.toString();
+        orden = uncliente.getPedido();
         setResizable(true);
         setBounds(100, 100, 538, 499);
         getContentPane().setLayout(null);
@@ -46,13 +46,16 @@ public class TicketDeCompra extends JInternalFrame {
         txtCAS.setText(contenido);
         textPane.setViewportView(txtCAS);
         getContentPane().add(textPane);
-        
+
         JButton btnNewButton = new JButton("Ticket de compra");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                almacenarEnBaseD(oC, dbC);
                 try {
-                    uncliente.addTickets(TicketDeCompra.this);
+                    almacenarEnBaseD(oC, dbC);
+                    VentanaUsuario vC = new VentanaUsuario(uncliente, oC, dbC, p);
+                    vC.setVisible(true);
+                    p.getDesktopPane().add(vC);
+                    p.getDesktopPane().repaint();
                     setClosed(true);
                 } catch (PropertyVetoException e1) {
                     // TODO Auto-generated catch block
@@ -66,6 +69,7 @@ public class TicketDeCompra extends JInternalFrame {
         getContentPane().add(btnNewButton);
         setVisible(true);
     }
+
     public static void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
         try {
             baseDatos.delete(listaCliente);

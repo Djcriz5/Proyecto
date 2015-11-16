@@ -6,17 +6,16 @@ import java.util.ArrayList;
 import Interfaz.TicketDeCompra;
 import Productos.*;
 
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
     /**
      * 
      */
     private static final long serialVersionUID = -1175933602200894458L;
-    private String nombre;
-    private long   numeroTargeta;
-    private String password;
-    private Orden  pedido;
-    private double credito;
-    private ArrayList<TicketDeCompra> ticketsDeCompra;
+    private String            nombre;
+    private long              numeroTargeta;
+    private String            password;
+    private Orden             pedido;
+    private double            credito;
 
     public Cliente(String name, String pass, long num, double saldo) {
         nombre = name;
@@ -24,14 +23,14 @@ public class Cliente implements Serializable{
         numeroTargeta = num;
         credito = saldo;
         pedido = new Orden();
-        ticketsDeCompra=new ArrayList<TicketDeCompra>();
     }
 
     public Cliente() {
         this("", "", 0, 800);
     }
-    public Cliente(String nombre,String pass){
-        this(nombre,pass,0,0);
+
+    public Cliente(String nombre, String pass) {
+        this(nombre, pass, 0, 0);
     }
 
     public Producto getProducto(String cual, int idx) {
@@ -158,14 +157,6 @@ public class Cliente implements Serializable{
             builder.append("\n" + pedido);
         }
         return builder.toString();
-    }
-
-    public ArrayList<TicketDeCompra> getTicketsDeCompra() {
-        return ticketsDeCompra;
-    }
-
-    public void addTickets(TicketDeCompra o) {
-        ticketsDeCompra.add(o);
     }
 
 }
