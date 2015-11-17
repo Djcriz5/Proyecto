@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.TextArea;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -21,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.util.ArrayList;
+import java.util.Properties;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -62,6 +66,7 @@ public class VentanaSugerencias extends JInternalFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
                     guardar(uncliente);
+                    enviarEmail(uncliente);
                     VentanaUsuario vC = new VentanaUsuario(uncliente, oC, dbC, p);
                     vC.setVisible(true);
                     p.getDesktopPane().add(vC);
@@ -88,6 +93,38 @@ public class VentanaSugerencias extends JInternalFrame {
         getContentPane().add(lblQuejasYSugerencias);
         setVisible(true);
 
+    }
+
+    public void enviarEmail(Cliente uncliente) {
+        try {
+            // Propiedades de la conexión
+            Properties props = new Properties();
+            props.setProperty("mail.smtp.host", "smtp.gmail.com");
+            props.setProperty("mail.smtp.starttls.enable", "true");
+            props.setProperty("mail.smtp.port", "587");
+            props.setProperty("mail.smtp.user", "proyectoscepoo@gmail.com");
+            props.setProperty("mail.smtp.auth", "true");
+
+            // Preparamos la sesion
+            Session session = Session.getDefaultInstance(props);
+
+            // Construimos el mensaje
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("proyectoscepoo@gmail.com.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("proyectoscepoo@gmail.com"));
+            message.setSubject(uncliente.getNombre());
+            message.setText(hacerMensaje(uncliente));
+
+            // Lo enviamos.
+            Transport t = session.getTransport("smtp");
+            t.connect("proyectoscepoo@gmail.com", "proyectosceescom");
+            t.sendMessage(message, message.getAllRecipients());
+
+            // Cierre.
+            t.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String hacerMensaje(Cliente uncliente) {
