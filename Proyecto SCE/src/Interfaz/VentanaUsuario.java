@@ -72,6 +72,15 @@ public class VentanaUsuario extends JInternalFrame {
         btnConsultarTickets = new JButton("Consultar historial");
         btnConsultarTickets.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                try {
+                    TicketDeCompra t = new TicketDeCompra(uncliente, oC, dbC, p);
+                    t.setVisible(true);
+                    p.getDesktopPane().add(t);
+                    setClosed(true);
+                } catch (PropertyVetoException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         });
         btnConsultarTickets.setBackground(new Color(255, 0, 51));
@@ -90,6 +99,16 @@ public class VentanaUsuario extends JInternalFrame {
         btnQuejas = new JButton("Quejas y sugerencias");
         btnQuejas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                VentanaSugerencias t = new VentanaSugerencias(uncliente, oC, dbC, p);
+                t.setVisible(true);
+                p.getDesktopPane().add(t);
+                try {
+                    setClosed(true);
+                } catch (PropertyVetoException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+
             }
         });
         btnQuejas.setBackground(new Color(255, 0, 51));

@@ -165,12 +165,6 @@ public class PrincipalLog {
                 String pass = new String(passwordField.getPassword());
                 if (buscarCliente(reposNombre.getText(), pass) != null) {
                     try {
-                        /*
-                         * shop = new
-                         * VentanaDeCompras(buscarCliente(reposNombre.getText(),
-                         * pass), baseDeDatos, dbClientes);
-                         * desktopPane.add(shop); shop.setVisible(true);
-                         */
                         VentanaUsuario vu = new VentanaUsuario(buscarCliente(reposNombre.getText(), pass), baseDeDatos,
                                 dbClientes, PrincipalLog.this);
                         desktopPane.add(vu);
