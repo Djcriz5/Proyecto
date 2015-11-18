@@ -90,6 +90,7 @@ public class VentanaUsuario extends JInternalFrame {
         btnInformacion = new JButton("informacion");
         btnInformacion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Informacion i = new Informacion(uncliente, oC, dbC, p, VentanaUsuario.this);
             }
         });
         btnInformacion.setBackground(new Color(255, 0, 51));

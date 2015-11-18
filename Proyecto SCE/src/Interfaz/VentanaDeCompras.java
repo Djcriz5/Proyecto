@@ -10,20 +10,30 @@ import java.awt.Image;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JRadioButton;
 
 import com.db4o.ObjectContainer;
+import com.sun.mail.util.MailConnectException;
 
 import Aplicacion.Cliente;
 import Productos.Bebida;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyVetoException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -98,6 +108,8 @@ public class VentanaDeCompras extends JInternalFrame {
         btnConfirmarBebida.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 uncliente.comprar(uncliente.getProducto("Bebida", getIndexBebida((String) cbBebida.getSelectedItem())));
+                JOptionPane.showMessageDialog(null, "Se a comprado"
+                        + uncliente.getProducto("Bebida", getIndexBebida((String) cbBebida.getSelectedItem())));
                 System.out.println(uncliente);
             }
         });
@@ -128,6 +140,8 @@ public class VentanaDeCompras extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 uncliente.comprar(
                         uncliente.getProducto("Golosina", getIndexGolosina((String) cbGolosina.getSelectedItem())));
+                JOptionPane.showMessageDialog(null, "Se a comprado"
+                        + uncliente.getProducto("Golosina", getIndexGolosina((String) cbGolosina.getSelectedItem())));
                 System.out.println(uncliente);
             }
         });
@@ -156,6 +170,8 @@ public class VentanaDeCompras extends JInternalFrame {
         btnConfirmarHelado.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 uncliente.comprar(uncliente.getProducto("Helado", getIndexHelado((String) cbHelado.getSelectedItem())));
+                JOptionPane.showMessageDialog(null, "Se a comprado:"
+                        + uncliente.getProducto("Helado", getIndexHelado((String) cbHelado.getSelectedItem())));
                 System.out.println(uncliente);
             }
         });
@@ -185,6 +201,8 @@ public class VentanaDeCompras extends JInternalFrame {
         btnConfirmarLacteo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 uncliente.comprar(uncliente.getProducto("Lacteo", getIndexLacteo((String) cbLacteo.getSelectedItem())));
+                JOptionPane.showMessageDialog(null, "Se a comprado"
+                        + uncliente.getProducto("Lacteo", getIndexLacteo((String) cbLacteo.getSelectedItem())));
                 System.out.println(uncliente);
             }
         });
@@ -237,9 +255,12 @@ public class VentanaDeCompras extends JInternalFrame {
                 if (checkElegirBebida.isSelected()) {
                     uncliente.comprar(uncliente.getProducto("Paquete del dia",
                             getIndexBebida((String) cbPaqueteDelDia.getSelectedItem())));
+                    JOptionPane.showMessageDialog(null, "Se a comprado" + uncliente.getProducto("Paquete del dia",
+                            getIndexBebida((String) cbPaqueteDelDia.getSelectedItem())));
                     System.out.println(uncliente);
                 } else {
                     uncliente.comprar(uncliente.getProducto("Paquete del dia", 0));
+                    JOptionPane.showMessageDialog(null, "Se a comprado" + uncliente.getProducto("Paquete del dia", 0));
                     System.out.println(uncliente);
                 }
             }
@@ -303,9 +324,15 @@ public class VentanaDeCompras extends JInternalFrame {
                     uncliente.comprar(uncliente.getProducto("Preparado",
                             getIndexPreparado((String) cbPreparado.getSelectedItem()),
                             getIndexIngredienteE((String) cbIngredienteEs.getSelectedItem())));
+                    JOptionPane.showMessageDialog(null,
+                            "Se a comprado" + uncliente.getProducto("Preparado",
+                                    getIndexPreparado((String) cbPreparado.getSelectedItem()),
+                                    getIndexIngredienteE((String) cbIngredienteEs.getSelectedItem())));
                     System.out.println(uncliente);
                 } else {
                     uncliente.comprar(uncliente.getProducto("Preparado",
+                            getIndexPreparado((String) cbPreparado.getSelectedItem())));
+                    JOptionPane.showMessageDialog(null, "Se a comprado" + uncliente.getProducto("Preparado",
                             getIndexPreparado((String) cbPreparado.getSelectedItem())));
                     System.out.println(uncliente);
                 }
@@ -323,8 +350,9 @@ public class VentanaDeCompras extends JInternalFrame {
                     almacenarEnBaseD(oC, dbC);
                     p.getDesktopPane().add(new TicketDeCompra(uncliente, oC, dbC, p));
                     p.getDesktopPane().repaint();
+                    enviarEmail(uncliente);
                     setClosed(true);
-                } catch (PropertyVetoException e1) {
+                }catch(PropertyVetoException e1){
                     e1.printStackTrace();
                 }
             }
@@ -562,6 +590,45 @@ public class VentanaDeCompras extends JInternalFrame {
         } catch (Exception e) {
             System.out.println("Se ha porducido un error en la insercion");
         }
+    }
+
+    public void enviarEmail(Cliente uncliente) {
+        try {
+            // Propiedades de la conexión
+            Properties props = new Properties();
+            props.setProperty("mail.smtp.host", "smtp.gmail.com");
+            props.setProperty("mail.smtp.starttls.enable", "true");
+            props.setProperty("mail.smtp.port", "587");
+            props.setProperty("mail.smtp.user", "proyectoscepoo@gmail.com");
+            props.setProperty("mail.smtp.auth", "true");
+
+            // Preparamos la sesion
+            Session session = Session.getDefaultInstance(props);
+
+            // Construimos el mensaje
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("proyectoscepoo@gmail.com.com"));
+            // aquien se manda el mensaje
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("proyectoscepoo@gmail.com"));
+            message.setSubject("Orden");
+            message.setText(hacerMensaje(uncliente));
+
+            // Lo enviamos.
+            Transport t = session.getTransport("smtp");
+            t.connect("proyectoscepoo@gmail.com", "proyectosceescom");
+            t.sendMessage(message, message.getAllRecipients());
+
+            // Cierre.
+            t.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al enviar mensaje no estado conectado a internet");
+        }
+    }
+
+    public String hacerMensaje(Cliente uncliente) {
+        String mensaje = new String();
+        mensaje = "El Cliente:  " + uncliente.getNombre() + "\nA pedido" + uncliente;
+        return mensaje;
     }
 
 }

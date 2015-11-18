@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PrincipalLog {
     private ArrayList<Cliente> listaDeClientes = new ArrayList<Cliente>();;
@@ -49,6 +51,8 @@ public class PrincipalLog {
             "clientes.db4o");
     private JTextField         txtRepostargeta;
     private JRadioButton       rdbtnAadirTargeta;
+    private JLabel             lblExit;
+    private ImageIcon          iconExit;
 
     /**
      * Create the application.
@@ -87,6 +91,19 @@ public class PrincipalLog {
         icono = new ImageIcon(PrincipalLog.class.getResource("/Imagenes/desktop.png"));
         iconoaux = new ImageIcon(icono.getImage().getScaledInstance(lblNewLabel.getWidth(), lblNewLabel.getHeight(),
                 Image.SCALE_DEFAULT));
+
+        lblExit = new JLabel("");
+        lblExit.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                cerrarConexion(baseDeDatos);
+                frame.dispose();
+            }
+        });
+        lblExit.setBounds(742, 50, 105, 108);
+        iconExit = new ImageIcon(new ImageIcon(PrincipalLog.class.getResource("/Imagenes/salir.png")).getImage()
+                .getScaledInstance(lblExit.getWidth(), lblExit.getHeight(), Image.SCALE_DEFAULT));
+        lblExit.setIcon(iconExit);
+        desktopPane.add(lblExit);
         lblNewLabel.setIcon(iconoaux);
         desktopPane.add(lblNewLabel);
 
@@ -205,6 +222,7 @@ public class PrincipalLog {
                 try {
                     dbClientes.add(new Cliente(nom, pass, Long.valueOf(txtRepostargeta.getText()), 800));
                     almacenarEnBaseD(baseDeDatos, dbClientes);
+                    JOptionPane.showMessageDialog(null, "Registro exitoso");
                 } catch (Exception e) {
                     System.out.println("error al almacenar Cliente");
                 }
@@ -212,6 +230,7 @@ public class PrincipalLog {
                 try {
                     dbClientes.add(new Cliente(nom, pass));
                     almacenarEnBaseD(baseDeDatos, dbClientes);
+                    JOptionPane.showMessageDialog(null, "Registro exitoso");
                 } catch (Exception e) {
                     System.out.println("error al almacenar Cliente");
                 }

@@ -1,28 +1,21 @@
 package Interfaz;
 
-import java.awt.EventQueue;
 import java.awt.Image;
-import java.awt.TextArea;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-
 import com.db4o.ObjectContainer;
+import com.sun.mail.util.MailConnectException;
 
 import Aplicacion.Cliente;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.util.ArrayList;
 import java.util.Properties;
 import java.awt.Font;
@@ -111,6 +104,7 @@ public class VentanaSugerencias extends JInternalFrame {
             // Construimos el mensaje
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress("proyectoscepoo@gmail.com.com"));
+            // aquien se manda el mensaje
             message.addRecipient(Message.RecipientType.TO, new InternetAddress("proyectoscepoo@gmail.com"));
             message.setSubject(uncliente.getNombre());
             message.setText(hacerMensaje(uncliente));
@@ -123,7 +117,7 @@ public class VentanaSugerencias extends JInternalFrame {
             // Cierre.
             t.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al enviar mensaje no estado conectado a internet");
         }
     }
 
