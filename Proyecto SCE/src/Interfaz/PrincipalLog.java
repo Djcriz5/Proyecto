@@ -17,6 +17,8 @@ import javax.swing.UIManager;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+
+import Aplicacion.Administrador;
 import Aplicacion.Cliente;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -53,6 +55,7 @@ public class PrincipalLog {
     private JRadioButton       rdbtnAadirTargeta;
     private JLabel             lblExit;
     private ImageIcon          iconExit;
+    private Administrador      admin;
 
     /**
      * Create the application.
@@ -73,6 +76,7 @@ public class PrincipalLog {
         }
         try {
             dbClientes = consultarBaseDeDatos(baseDeDatos, dbClientes);
+            admin = new Administrador("contrasena");
             System.out.println("Base de datos sincronizada");
         } catch (Exception e) {
             System.out.println("error al leer base de datos");
@@ -180,20 +184,37 @@ public class PrincipalLog {
         btnSingIn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String pass = new String(passwordField.getPassword());
-                if (buscarCliente(reposNombre.getText(), pass) != null) {
-                    try {
-                        VentanaUsuario vu = new VentanaUsuario(buscarCliente(reposNombre.getText(), pass), baseDeDatos,
-                                dbClientes, PrincipalLog.this);
-                        desktopPane.add(vu);
-                        vu.setVisible(true);
-                        internalLogin.setClosed(true);
+                if (reposNombre.getText().equals("Admin")) {
+                    if (admin.getContrasena().equals(pass)) {
+                        try {
+                            VentanaAdmin va = new VentanaAdmin(admin, baseDeDatos, dbClientes, PrincipalLog.this);
+                            desktopPane.add(va);
+                            va.setVisible(true);
+                            internalLogin.setClosed(true);
+                        } catch (PropertyVetoException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
                         desktopPane.repaint();
-                    } catch (PropertyVetoException e1) {
-                        System.out.println("se produjo un error al acceder");
-                        e1.printStackTrace();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Contraseña Incorrecta");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Usuario no registrado verifique datos");
+                    if (buscarCliente(reposNombre.getText(), pass) != null) {
+                        try {
+                            VentanaUsuario vu = new VentanaUsuario(buscarCliente(reposNombre.getText(), pass),
+                                    baseDeDatos, dbClientes, PrincipalLog.this);
+                            desktopPane.add(vu);
+                            vu.setVisible(true);
+                            internalLogin.setClosed(true);
+                            desktopPane.repaint();
+                        } catch (PropertyVetoException e1) {
+                            System.out.println("se produjo un error al acceder");
+                            e1.printStackTrace();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuario no registrado verifique datos");
+                    }
                 }
             }
         });
@@ -217,26 +238,30 @@ public class PrincipalLog {
     }
 
     public void addCliente(String nom, String pass) {
-        if (buscarCliente(nom, pass) == null) {
-            if (rdbtnAadirTargeta.isSelected()) {
-                try {
-                    dbClientes.add(new Cliente(nom, pass, Long.valueOf(txtRepostargeta.getText()), 800));
-                    almacenarEnBaseD(baseDeDatos, dbClientes);
-                    JOptionPane.showMessageDialog(null, "Registro exitoso");
-                } catch (Exception e) {
-                    System.out.println("error al almacenar Cliente");
+        if (nom.equals("Admin")) {
+            JOptionPane.showMessageDialog(null, "usuario reservado escoja otro nombre");
+        } else {
+            if (buscarCliente(nom, pass) == null) {
+                if (rdbtnAadirTargeta.isSelected()) {
+                    try {
+                        dbClientes.add(new Cliente(nom, pass, Long.valueOf(txtRepostargeta.getText()), 800));
+                        almacenarEnBaseD(baseDeDatos, dbClientes);
+                        JOptionPane.showMessageDialog(null, "Registro exitoso");
+                    } catch (Exception e) {
+                        System.out.println("error al almacenar Cliente");
+                    }
+                } else {
+                    try {
+                        dbClientes.add(new Cliente(nom, pass));
+                        almacenarEnBaseD(baseDeDatos, dbClientes);
+                        JOptionPane.showMessageDialog(null, "Registro exitoso");
+                    } catch (Exception e) {
+                        System.out.println("error al almacenar Cliente");
+                    }
                 }
             } else {
-                try {
-                    dbClientes.add(new Cliente(nom, pass));
-                    almacenarEnBaseD(baseDeDatos, dbClientes);
-                    JOptionPane.showMessageDialog(null, "Registro exitoso");
-                } catch (Exception e) {
-                    System.out.println("error al almacenar Cliente");
-                }
+                JOptionPane.showMessageDialog(null, "Usuario registrado escoja otro usuario");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario registrado escoja otro usuario");
         }
     }
 
