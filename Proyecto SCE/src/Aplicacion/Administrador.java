@@ -1,15 +1,10 @@
 package Aplicacion;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 public class Administrador {
     private String                  contrasena;
-    private HashMap<String, String> mapaClientes;
-
     public Administrador(String pass) {
         contrasena = pass;
-        mapaClientes = new HashMap<String, String>();
     }
 
     public Cliente buscarCliente(ArrayList<Cliente> dbClientes, String nom, String pass) {
@@ -36,16 +31,6 @@ public class Administrador {
 
     public void setContrasenaCliente(ArrayList<Cliente> dbClientes, String nom, String pass, String nuevopass) {
         buscarCliente(dbClientes, nom, pass).setPassword(nuevopass);
-    }
-
-    public HashMap<String, String> getMapaClientes() {
-        return mapaClientes;
-    }
-
-    public void setMapaClientes(ArrayList<Cliente> dbClientes) {
-        for (Cliente cliente : dbClientes) {
-            mapaClientes.put(cliente.getNombre(), cliente.getPassword());
-        }
     }
 
     public String getContrasena() {
