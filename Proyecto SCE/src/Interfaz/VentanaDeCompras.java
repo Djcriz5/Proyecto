@@ -16,8 +16,8 @@ import javax.swing.JRadioButton;
 import com.db4o.ObjectContainer;
 import com.sun.mail.util.MailConnectException;
 
-import Aplicacion.Cliente;
-import Productos.Bebida;
+import clasesApp.Bebida;
+import clasesApp.Cliente;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -349,10 +349,15 @@ public class VentanaDeCompras extends JInternalFrame {
                 try {
                     almacenarEnBaseD(oC, dbC);
                     p.getDesktopPane().add(new TicketDeCompra(uncliente, oC, dbC, p));
-                    p.getDesktopPane().repaint();
-                    enviarEmail(uncliente);
                     setClosed(true);
-                }catch(PropertyVetoException e1){
+                    p.getDesktopPane().repaint();
+                    Thread hiloEmail = new Thread() {
+                        public void run() {
+                            enviarEmail(uncliente);
+                        }
+                    };
+                    hiloEmail.start();
+                } catch (PropertyVetoException e1) {
                     e1.printStackTrace();
                 }
             }
@@ -617,8 +622,9 @@ public class VentanaDeCompras extends JInternalFrame {
             Transport t = session.getTransport("smtp");
             t.connect("proyectoscepoo@gmail.com", "proyectosceescom");
             t.sendMessage(message, message.getAllRecipients());
-
+            JOptionPane.showMessageDialog(null, "la orden a sido enviada correctamente");
             // Cierre.
+            
             t.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al enviar mensaje no estado conectado a internet");

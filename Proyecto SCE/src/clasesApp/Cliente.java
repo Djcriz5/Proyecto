@@ -1,10 +1,10 @@
-package Aplicacion;
+package clasesApp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import Interfaz.TicketDeCompra;
-import Productos.*;
+import clasesApp.*;
 
 public class Cliente implements Serializable {
     /**

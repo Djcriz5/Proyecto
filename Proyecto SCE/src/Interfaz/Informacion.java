@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.db4o.ObjectContainer;
 
-import Aplicacion.Cliente;
+import clasesApp.Cliente;
 
 import java.awt.Color;
 import javax.swing.JLabel;

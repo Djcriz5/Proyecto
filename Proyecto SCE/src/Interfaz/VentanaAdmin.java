@@ -14,8 +14,9 @@ import javax.swing.JTextArea;
 
 import com.db4o.ObjectContainer;
 
-import Aplicacion.Administrador;
-import Aplicacion.Cliente;
+import clasesApp.Administrador;
+import clasesApp.Cliente;
+
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;

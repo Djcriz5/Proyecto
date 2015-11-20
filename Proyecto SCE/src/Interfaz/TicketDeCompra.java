@@ -7,8 +7,8 @@ import javax.swing.JTextPane;
 
 import com.db4o.ObjectContainer;
 
-import Aplicacion.Cliente;
-import Aplicacion.Orden;
+import clasesApp.Cliente;
+import clasesApp.Orden;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;

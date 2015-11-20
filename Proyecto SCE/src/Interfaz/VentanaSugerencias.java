@@ -13,7 +13,8 @@ import javax.swing.JTextArea;
 import com.db4o.ObjectContainer;
 import com.sun.mail.util.MailConnectException;
 
-import Aplicacion.Cliente;
+import clasesApp.Cliente;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
@@ -59,7 +60,12 @@ public class VentanaSugerencias extends JInternalFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
                     guardar(uncliente);
-                    enviarEmail(uncliente);
+                    Thread hiloEmail = new Thread() {
+                        public void run() {
+                            enviarEmail(uncliente);
+                        }
+                    };
+                    hiloEmail.start();
                     VentanaUsuario vC = new VentanaUsuario(uncliente, oC, dbC, p);
                     vC.setVisible(true);
                     p.getDesktopPane().add(vC);
@@ -116,6 +122,7 @@ public class VentanaSugerencias extends JInternalFrame {
 
             // Cierre.
             t.close();
+            JOptionPane.showMessageDialog(null, "Mensaje enviado con exito");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al enviar mensaje no estado conectado a internet");
         }

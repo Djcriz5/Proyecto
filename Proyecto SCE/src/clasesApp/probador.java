@@ -1,8 +1,6 @@
-package Productos;
+package clasesApp;
 
 import java.util.LinkedList;
-
-import Aplicacion.Orden;
 
 public class probador {
 

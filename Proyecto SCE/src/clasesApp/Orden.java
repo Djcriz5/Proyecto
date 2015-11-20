@@ -1,12 +1,9 @@
-package Aplicacion;
+package clasesApp;
 
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
-
-import Productos.IContable;
-import Productos.Producto;
 
 public class Orden implements Serializable {
     

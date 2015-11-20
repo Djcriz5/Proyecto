@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 
 import com.db4o.ObjectContainer;
 
-import Aplicacion.Cliente;
+import clasesApp.Cliente;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;

@@ -1,6 +1,4 @@
-package Productos;
-
-import Aplicacion.Cliente;
+package clasesApp;
 
 public class ProbadorCliente {
     public static void main(String[] args) {

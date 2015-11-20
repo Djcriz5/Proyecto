@@ -18,8 +18,9 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 
-import Aplicacion.Administrador;
-import Aplicacion.Cliente;
+import clasesApp.Administrador;
+import clasesApp.Cliente;
+
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -277,7 +278,7 @@ public class PrincipalLog {
         return baseDeDatos;
     }
 
-    public static void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
+    public void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
         try {
             baseDatos.store(listaCliente);
             baseDatos.commit();

@@ -1,8 +1,10 @@
-package Aplicacion;
+package clasesApp;
 
 import java.util.ArrayList;
+
 public class Administrador {
-    private String                  contrasena;
+    private String contrasena;
+
     public Administrador(String pass) {
         contrasena = pass;
     }

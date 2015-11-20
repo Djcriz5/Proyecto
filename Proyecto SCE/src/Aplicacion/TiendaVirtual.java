@@ -18,11 +18,10 @@ public class TiendaVirtual {
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
-                
+                } 
+
             }
         });
     }
-
 
 }

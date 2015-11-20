@@ -1,4 +1,4 @@
-package Productos;
+package clasesApp;
 
 import java.io.Serializable;
 
