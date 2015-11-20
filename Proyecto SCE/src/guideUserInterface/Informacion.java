@@ -1,4 +1,4 @@
-package Interfaz;
+package guideUserInterface;
 
 import java.awt.FlowLayout;
 

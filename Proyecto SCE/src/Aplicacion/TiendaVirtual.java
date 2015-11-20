@@ -2,7 +2,7 @@ package Aplicacion;
 
 import java.awt.EventQueue;
 
-import Interfaz.PrincipalLog;
+import guideUserInterface.PrincipalLog;
 
 public class TiendaVirtual {
 
