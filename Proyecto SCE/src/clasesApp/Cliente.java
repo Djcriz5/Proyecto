@@ -3,8 +3,8 @@ package clasesApp;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import Interfaz.TicketDeCompra;
 import clasesApp.*;
+import guideUserInterface.TicketDeCompra;
 
 public class Cliente implements Serializable {
     /**
