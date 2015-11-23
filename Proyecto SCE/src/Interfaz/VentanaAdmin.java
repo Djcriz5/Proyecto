@@ -1,4 +1,4 @@
-package guideUserInterface;
+package Interfaz;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;

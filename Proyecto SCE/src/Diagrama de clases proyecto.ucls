@@ -82,8 +82,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="guideUserInterface.PrincipalLog" project="Proyecto SCE" 
-    file="/Proyecto SCE/src/guideUserInterface/PrincipalLog.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="Interfaz.PrincipalLog" project="Proyecto SCE" 
+    file="/Proyecto SCE/src/Interfaz/PrincipalLog.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="696" y="660"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
