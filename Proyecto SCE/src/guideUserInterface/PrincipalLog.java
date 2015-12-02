@@ -156,7 +156,7 @@ public class PrincipalLog {
         btnSingIn.setBounds(253, 291, 115, 29);
         internalLogin.getContentPane().add(btnSingIn);
 
-        rdbtnAadirTargeta = new JRadioButton("Añadir targeta");
+        rdbtnAadirTargeta = new JRadioButton("Usar targeta");
         rdbtnAadirTargeta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 if (rdbtnAadirTargeta.isSelected()) {

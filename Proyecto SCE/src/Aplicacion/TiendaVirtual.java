@@ -19,7 +19,6 @@ public class TiendaVirtual {
                 } catch (Exception e) {
                     e.printStackTrace();
                 } 
-
             }
         });
     }
