@@ -41,7 +41,6 @@ public class VentanaAdmin extends JInternalFrame {
     public VentanaAdmin(Administrador admin, ObjectContainer oC, ArrayList<Cliente> dbC, PrincipalLog p) {
         getContentPane().setBackground(Color.DARK_GRAY);
         getContentPane().setLayout(null);
-
         table = new JTable();
         table.setBounds(101, 57, 1, 1);
         getContentPane().add(table);
@@ -79,6 +78,7 @@ public class VentanaAdmin extends JInternalFrame {
                 admin.setContrasenaCliente(dbC, selectedCliente[0], selectedCliente[1], txtReposnuevopass.getText());
                 almacenarEnBaseD(oC, dbC);
                 JOptionPane.showMessageDialog(null, "Contrasena cambiada");
+                comboBox.removeAll();
                 llenarCombobox(comboBox, dbC);
             }
         });
@@ -134,12 +134,10 @@ public class VentanaAdmin extends JInternalFrame {
     }
 
     public void llenarCombobox(JComboBox<String> cb, ArrayList<Cliente> dbC) {
-        cb.removeAll();
         for (Cliente cliente : dbC) {
             cb.addItem(cliente.getNombre() + "#" + cliente.getPassword());
         }
         cb.repaint();
-
     }
 
     public static void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {

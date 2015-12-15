@@ -28,7 +28,7 @@ public class Administrador {
     }
 
     public void setCreditoCliente(ArrayList<Cliente> dbClientes, String nom, String pass, Double nuevoCredito) {
-        buscarCliente(dbClientes, nom, pass).setCredito(nuevoCredito);
+        buscarCliente(dbClientes, nom, pass).setCredito( buscarCliente(dbClientes, nom, pass).getCredito()+nuevoCredito);
     }
 
     public void setContrasenaCliente(ArrayList<Cliente> dbClientes, String nom, String pass, String nuevopass) {
