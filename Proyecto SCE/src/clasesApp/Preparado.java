@@ -2,17 +2,17 @@ package clasesApp;
 
 import java.io.Serializable;
 
-public class Preparado extends Producto implements IContable,Serializable{
-   /**
+public class Preparado extends Producto implements IContable, Serializable {
+    /**
      * 
      */
-    private static final long serialVersionUID = -8314460045236646718L;
-private IngredienteEspecial extra;
-   private int                 indexPreparado;
-   private String              tipoDePreparado;
-   private double              precio;
-   private boolean             disponibilidad;
-   private int                 FlagGuisadoDeldia;
+    private static final long   serialVersionUID = -8314460045236646718L;
+    private IngredienteEspecial extra;
+    private int                 indexPreparado;
+    private String              tipoDePreparado;
+    private double              precio;
+    private boolean             disponibilidad;
+    private int                 FlagGuisadoDeldia;
 
     public Preparado(int id) {
         super(6);
@@ -27,7 +27,7 @@ private IngredienteEspecial extra;
 
         }
         precio = setPrecio(tipoDePreparado);
-        disponibilidad=setDisponibilidad();
+        disponibilidad = setDisponibilidad();
     }
 
     public Preparado(int id, int extraID) {
@@ -137,17 +137,21 @@ private IngredienteEspecial extra;
         IngredienteEspecial p = new IngredienteEspecial(cual);
         extra = p;
         precio += extra.precioIngrediente;
-        p=null;
+        p = null;
     }
-    private boolean setDisponibilidad(){
-        return(indexPreparado!=0); 
-      }
+
+    private boolean setDisponibilidad() {
+        return (indexPreparado != 0);
+    }
+
     public double getPrecio() {
         return precio;
     }
-    public int getIndex(){
+
+    public int getIndex() {
         return indexPreparado;
     }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (FlagGuisadoDeldia != 0) {

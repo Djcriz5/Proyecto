@@ -1,152 +1,72 @@
 package guideUserInterface;
 
-import java.awt.EventQueue;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
-
 import java.awt.Color;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-
-import com.db4o.ObjectContainer;
-
-import clasesApp.Administrador;
-import clasesApp.Cliente;
-
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
 
 public class VentanaAdmin extends JInternalFrame {
-    private JTable     table;
-    private JComboBox  comboBox;
-    String[]           selectedCliente;
-    private JTextArea  txtpnInformacionDelCliente;
-    private JTextField txtReposnuevopass;
-    private JTextField txtReposnuevosaldo;
-    private JButton    btnCambiarSaldo;
-    private JTextField textField;
-    private JButton    btnNewButton;
-    private JButton    btnEliminarCliente;
-    private JButton    btnCambiarContrasena;
+    private JButton           btnEliminarCliente;
+    private JTable            table;
+    private DefaultTableModel modelo;
+    private JLabel            lblNewLabel;
+    private ImageIcon         iconoAdmin;
+    private JScrollPane       scrollpane;
 
-    public VentanaAdmin(Administrador admin, ObjectContainer oC, ArrayList<Cliente> dbC, PrincipalLog p) {
+    public VentanaAdmin() {
         getContentPane().setBackground(Color.DARK_GRAY);
         getContentPane().setLayout(null);
-        table = new JTable();
-        table.setBounds(101, 57, 1, 1);
-        getContentPane().add(table);
         setBounds(100, 100, 554, 511);
-
-        txtpnInformacionDelCliente = new JTextArea();
-        txtpnInformacionDelCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        txtpnInformacionDelCliente.setBounds(15, 93, 283, 223);
-        txtpnInformacionDelCliente.setBorder(null);
-        txtpnInformacionDelCliente.setForeground(Color.white);
-        txtpnInformacionDelCliente.setBackground(Color.DARK_GRAY);
-        getContentPane().add(txtpnInformacionDelCliente);
-
-        comboBox = new JComboBox();
-        comboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                selectedCliente = comboBox.getSelectedItem().toString().split("#");
-                txtpnInformacionDelCliente
-                        .setText(admin.buscarCliente(dbC, selectedCliente[0], selectedCliente[1]).toString());
-
-            }
-        });
-        comboBox.setBounds(15, 51, 198, 26);
-        getContentPane().add(comboBox);
-        llenarCombobox(comboBox, dbC);
-
-        txtReposnuevopass = new JTextField();
-        txtReposnuevopass.setBounds(15, 347, 146, 26);
-        getContentPane().add(txtReposnuevopass);
-        txtReposnuevopass.setColumns(10);
-
-        btnCambiarContrasena = new JButton("Cambiar pass");
-        btnCambiarContrasena.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                admin.setContrasenaCliente(dbC, selectedCliente[0], selectedCliente[1], txtReposnuevopass.getText());
-                almacenarEnBaseD(oC, dbC);
-                JOptionPane.showMessageDialog(null, "Contrasena cambiada");
-                comboBox.removeAll();
-                llenarCombobox(comboBox, dbC);
-            }
-        });
-        btnCambiarContrasena.setBounds(15, 389, 146, 29);
-        getContentPane().add(btnCambiarContrasena);
-
-        txtReposnuevosaldo = new JTextField();
-        txtReposnuevosaldo.setBounds(189, 347, 146, 26);
-        getContentPane().add(txtReposnuevosaldo);
-        txtReposnuevosaldo.setColumns(10);
-
-        btnCambiarSaldo = new JButton("Cambiar Saldo");
-        btnCambiarSaldo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                admin.setCreditoCliente(dbC, selectedCliente[0], selectedCliente[1],
-                        Double.valueOf(txtReposnuevosaldo.getText()));
-                almacenarEnBaseD(oC, dbC);
-                JOptionPane.showMessageDialog(null, "Saldo actualisado");
-                llenarCombobox(comboBox, dbC);
-            }
-        });
-        btnCambiarSaldo.setBounds(189, 389, 146, 29);
-        getContentPane().add(btnCambiarSaldo);
-
-        textField = new JTextField();
-        textField.setBounds(361, 347, 162, 26);
-        getContentPane().add(textField);
-        textField.setColumns(10);
-
-        btnNewButton = new JButton("Cambiar targeta");
-        btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                admin.setTargetaDeCredito(dbC, selectedCliente[0], selectedCliente[1],
-                        Long.valueOf(textField.getText()));
-                almacenarEnBaseD(oC, dbC);
-                JOptionPane.showMessageDialog(null, "Numero de targeta actualisado");
-                llenarCombobox(comboBox, dbC);
-            }
-        });
-        btnNewButton.setBounds(361, 389, 162, 29);
-        getContentPane().add(btnNewButton);
         btnEliminarCliente = new JButton("Eliminar Cliente");
-        btnEliminarCliente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                dbC.remove(admin.buscarCliente(dbC, selectedCliente[0], selectedCliente[1]));
-                almacenarEnBaseD(oC, dbC);
-                JOptionPane.showMessageDialog(null, "Cliente Eliminado");
-                llenarCombobox(comboBox, dbC);
-            }
-        });
-        btnEliminarCliente.setBounds(372, 50, 151, 29);
+        btnEliminarCliente.setBackground(Color.RED);
+        btnEliminarCliente.setBounds(15, 425, 151, 29);
         getContentPane().add(btnEliminarCliente);
+
+        table = new JTable();
+        table.setBounds(15, 132, 508, 277);
+        scrollpane = new JScrollPane(table);
+        scrollpane.setBounds(15, 109, 508, 300);
+        getContentPane().add(scrollpane);
+        lblNewLabel = new JLabel("");
+        lblNewLabel.setBounds(430, 6, 93, 87);
+        iconoAdmin = new ImageIcon(new ImageIcon(VentanaUsuario.class.getResource("/Imagenes/lock.png")).getImage()
+                .getScaledInstance(lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_DEFAULT));
+        lblNewLabel.setIcon(iconoAdmin);
+        getContentPane().add(lblNewLabel);
+        modelo = (DefaultTableModel) table.getModel();
+        modelo.addColumn("Cliente");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Contrasena");
+        modelo.addColumn("Numero de Targeta");
+        modelo.addColumn("Saldo");
     }
 
-    public void llenarCombobox(JComboBox<String> cb, ArrayList<Cliente> dbC) {
-        for (Cliente cliente : dbC) {
-            cb.addItem(cliente.getNombre() + "#" + cliente.getPassword());
-        }
-        cb.repaint();
+    public JTable getTable() {
+        return table;
     }
 
-    public static void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
-        try {
-            baseDatos.store(listaCliente);
-            baseDatos.commit();
-            System.out.println("Se ha almacenado correctamente en la base de datos");
-        } catch (Exception e) {
-            System.out.println("Se ha porducido un error en la insercion");
-        }
+    public void setTable(JTable table) {
+        this.table = table;
+    }
+
+    public DefaultTableModel getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(DefaultTableModel modelo) {
+        this.modelo = modelo;
+    }
+
+    public JButton getBtnEliminarCliente() {
+        return btnEliminarCliente;
+    }
+
+    public void setBtnEliminarCliente(JButton btnEliminarCliente) {
+        this.btnEliminarCliente = btnEliminarCliente;
     }
 }

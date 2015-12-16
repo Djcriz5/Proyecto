@@ -1,57 +1,40 @@
 package guideUserInterface;
 
-import java.awt.EventQueue;
-import java.awt.Image;
-
-import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Rectangle;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import java.awt.Rectangle;
-import javax.swing.JInternalFrame;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-import com.db4o.Db4oEmbedded;
-import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-
-import clasesApp.Administrador;
-import clasesApp.Cliente;
-
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 public class PrincipalLog {
-    public JFrame              frame;
-    public JDesktopPane       desktopPane;
-    private ImageIcon          icono;
-    private ImageIcon          iconoaux;
-    private JLabel             lblNewLabel;
-    private JInternalFrame     internalLogin;
-    private JTextField         reposNombre;
-    private JLabel             lblUsuario;
-    private JPasswordField     passwordField;
-    private JLabel             lblContrasena;
-    private JButton            btnSingUp;
-    private JLabel             Mensaje;
-    private JButton            btnSingIn;
-    private VentanaDeCompras   shop;
-    private JTextField         txtRepostargeta;
-    private JRadioButton       rdbtnAadirTargeta;
-    private JLabel             lblExit;
-    private ImageIcon          iconExit;
+    public JFrame            frame;
+    public JDesktopPane      desktopPane;
+    private ImageIcon        icono;
+    private ImageIcon        iconoaux;
+    private JLabel           lblNewLabel;
+    private JInternalFrame   internalLogin;
+    private JTextField       reposNombre;
+    private JLabel           lblUsuario;
+    private JPasswordField   passwordField;
+    private JLabel           lblContrasena;
+    private JButton          btnSingUp;
+    private JLabel           Mensaje;
+    private JButton          btnSingIn;
+    private VentanaDeCompras shop;
+    private JTextField       txtRepostargeta;
+    private JRadioButton     rdbtnAadirTargeta;
+    private JLabel           lblExit;
+    private ImageIcon        iconExit;
 
     /**
      * Create the application.

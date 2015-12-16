@@ -2,19 +2,20 @@ package clasesApp;
 
 import java.io.Serializable;
 
-public class Bebida extends Producto implements IContable,Serializable{
+public class Bebida extends Producto implements IContable, Serializable {
     /**
      * 
      */
     private static final long serialVersionUID = 1204478226960898358L;
-    int     indexBebida;
-    String  tipoDeBebida;
-    double  precio;
-    boolean disponibilidad;
+    int                       indexBebida;
+    String                    tipoDeBebida;
+    double                    precio;
+    boolean                   disponibilidad;
 
     public Bebida() {
         this(0);
     }
+
     public Bebida(int idBebida) {
         super(2);
         indexBebida = idBebida;
@@ -23,7 +24,6 @@ public class Bebida extends Producto implements IContable,Serializable{
         disponibilidad = setDisponibilidad();
 
     }
-    
 
     public String setTipoDeBebida(int id) {
 
@@ -107,25 +107,28 @@ public class Bebida extends Producto implements IContable,Serializable{
     private boolean setDisponibilidad() {
         return (indexBebida != 0);
     }
-    public void setBebida(int indx){
-        indexBebida=indx;
+
+    public void setBebida(int indx) {
+        indexBebida = indx;
         tipoDeBebida = setTipoDeBebida(indexBebida);
         precio = setPrecio(tipoDeBebida);
         disponibilidad = setDisponibilidad();
-        
+
     }
-    public void bebidaRandom(){
-        int seleccion = (int) (Math.random() *10)+1;
+
+    public void bebidaRandom() {
+        int seleccion = (int) (Math.random() * 10) + 1;
         setBebida(seleccion);
     }
+
     public double getPrecio() {
         return precio;
     }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (disponibilidad) {
-            builder.append(
-                    super.toString() + "\nTipo:\n" + tipoDeBebida + "\nPrecio: $" + precio + "\nDisponible" );
+            builder.append(super.toString() + "\nTipo:\n" + tipoDeBebida + "\nPrecio: $" + precio + "\nDisponible");
         } else {
             builder.append("Bebida No Disponible");
         }

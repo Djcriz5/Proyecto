@@ -1,43 +1,14 @@
 package guideUserInterface;
 
-import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
-import java.awt.Rectangle;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JRadioButton;
-
-import com.db4o.ObjectContainer;
-import com.sun.mail.util.MailConnectException;
-
-import clasesApp.Bebida;
-import clasesApp.Cliente;
-
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.beans.PropertyVetoException;
-import java.util.ArrayList;
-import java.util.Properties;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JRadioButton;
 
 public class VentanaDeCompras extends JInternalFrame {
     /**
@@ -79,7 +50,7 @@ public class VentanaDeCompras extends JInternalFrame {
     /**
      * Create the frame.
      */
-    public VentanaDeCompras(Cliente uncliente, ObjectContainer oC, ArrayList<Cliente> dbC, PrincipalLog p) {
+    public VentanaDeCompras() {
         getContentPane().setBackground(Color.DARK_GRAY);
         getContentPane().setLayout(null);
         // variables bebida
@@ -103,16 +74,7 @@ public class VentanaDeCompras extends JInternalFrame {
         cbBebida.addItem("Boing manzana");
         cbBebida.addItem("Agua embotellada");
         getContentPane().add(cbBebida);
-
         btnConfirmarBebida = new JButton("");
-        btnConfirmarBebida.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                uncliente.comprar(uncliente.getProducto("Bebida", getIndexBebida((String) cbBebida.getSelectedItem())));
-                JOptionPane.showMessageDialog(null, "Se a comprado"
-                        + uncliente.getProducto("Bebida", getIndexBebida((String) cbBebida.getSelectedItem())));
-                System.out.println(uncliente);
-            }
-        });
         btnConfirmarBebida.setBackground(new Color(30, 144, 255));
         btnConfirmarBebida.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarBebida.setBounds(175, 124, 42, 37);
@@ -136,15 +98,6 @@ public class VentanaDeCompras extends JInternalFrame {
         cbGolosina.addItem("lunetas");
         getContentPane().add(cbGolosina);
         btnConfirmarGolosina = new JButton("");
-        btnConfirmarGolosina.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                uncliente.comprar(
-                        uncliente.getProducto("Golosina", getIndexGolosina((String) cbGolosina.getSelectedItem())));
-                JOptionPane.showMessageDialog(null, "Se a comprado"
-                        + uncliente.getProducto("Golosina", getIndexGolosina((String) cbGolosina.getSelectedItem())));
-                System.out.println(uncliente);
-            }
-        });
         btnConfirmarGolosina.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarGolosina.setBackground(new Color(30, 144, 255));
         btnConfirmarGolosina.setBounds(442, 124, 42, 37);
@@ -167,14 +120,6 @@ public class VentanaDeCompras extends JInternalFrame {
         cbHelado.setBounds(45, 295, 115, 26);
         getContentPane().add(cbHelado);
         btnConfirmarHelado = new JButton("");
-        btnConfirmarHelado.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                uncliente.comprar(uncliente.getProducto("Helado", getIndexHelado((String) cbHelado.getSelectedItem())));
-                JOptionPane.showMessageDialog(null, "Se a comprado:"
-                        + uncliente.getProducto("Helado", getIndexHelado((String) cbHelado.getSelectedItem())));
-                System.out.println(uncliente);
-            }
-        });
         btnConfirmarHelado.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarHelado.setBackground(new Color(30, 144, 255));
         btnConfirmarHelado.setBounds(175, 284, 42, 37);
@@ -198,14 +143,6 @@ public class VentanaDeCompras extends JInternalFrame {
         cbLacteo.addItem("Jugo Ades");
         getContentPane().add(cbLacteo);
         btnConfirmarLacteo = new JButton("");
-        btnConfirmarLacteo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                uncliente.comprar(uncliente.getProducto("Lacteo", getIndexLacteo((String) cbLacteo.getSelectedItem())));
-                JOptionPane.showMessageDialog(null, "Se a comprado"
-                        + uncliente.getProducto("Lacteo", getIndexLacteo((String) cbLacteo.getSelectedItem())));
-                System.out.println(uncliente);
-            }
-        });
         btnConfirmarLacteo.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarLacteo.setBackground(new Color(30, 144, 255));
         btnConfirmarLacteo.setBounds(442, 284, 42, 37);
@@ -235,36 +172,10 @@ public class VentanaDeCompras extends JInternalFrame {
         getContentPane().add(cbPaqueteDelDia);
         checkElegirBebida = new JRadioButton("Elegir bebida");
         checkElegirBebida.setBackground(new Color(30, 144, 255));
-        checkElegirBebida.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (checkElegirBebida.isSelected()) {
-                    cbPaqueteDelDia.setBackground(new Color(30, 144, 255));
-                    cbPaqueteDelDia.setEnabled(true);
-                } else {
-                    cbPaqueteDelDia.setBackground(Color.black);
-                    cbPaqueteDelDia.setEnabled(false);
-                }
-            }
-        });
         checkElegirBebida.setBounds(55, 459, 155, 29);
         getContentPane().add(checkElegirBebida);
 
         btnConfirmarPaqueteDelDia = new JButton("");
-        btnConfirmarPaqueteDelDia.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (checkElegirBebida.isSelected()) {
-                    uncliente.comprar(uncliente.getProducto("Paquete del dia",
-                            getIndexBebida((String) cbPaqueteDelDia.getSelectedItem())));
-                    JOptionPane.showMessageDialog(null, "Se a comprado" + uncliente.getProducto("Paquete del dia",
-                            getIndexBebida((String) cbPaqueteDelDia.getSelectedItem())));
-                    System.out.println(uncliente);
-                } else {
-                    uncliente.comprar(uncliente.getProducto("Paquete del dia", 0));
-                    JOptionPane.showMessageDialog(null, "Se a comprado" + uncliente.getProducto("Paquete del dia", 0));
-                    System.out.println(uncliente);
-                }
-            }
-        });
         btnConfirmarPaqueteDelDia.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarPaqueteDelDia.setBackground(new Color(30, 144, 255));
         btnConfirmarPaqueteDelDia.setBounds(224, 489, 42, 37);
@@ -291,17 +202,6 @@ public class VentanaDeCompras extends JInternalFrame {
         getContentPane().add(lblPreparado);
         rdbtnIngredienteExtra = new JRadioButton("ingrediente extra");
         rdbtnIngredienteExtra.setBackground(new Color(30, 144, 255));
-        rdbtnIngredienteExtra.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (rdbtnIngredienteExtra.isSelected()) {
-                    cbIngredienteEs.setBackground(Color.white);
-                    cbIngredienteEs.setEnabled(true);
-                } else {
-                    cbIngredienteEs.setBackground(Color.DARK_GRAY);
-                    cbIngredienteEs.setEnabled(false);
-                }
-            }
-        });
         rdbtnIngredienteExtra.setBounds(312, 459, 155, 29);
         getContentPane().add(rdbtnIngredienteExtra);
         cbPreparado = new JComboBox<String>();
@@ -318,50 +218,12 @@ public class VentanaDeCompras extends JInternalFrame {
         cbPreparado.setBounds(478, 460, 152, 26);
         getContentPane().add(cbPreparado);
         btnConfirmarPreparado = new JButton("");
-        btnConfirmarPreparado.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (rdbtnIngredienteExtra.isSelected()) {
-                    uncliente.comprar(uncliente.getProducto("Preparado",
-                            getIndexPreparado((String) cbPreparado.getSelectedItem()),
-                            getIndexIngredienteE((String) cbIngredienteEs.getSelectedItem())));
-                    JOptionPane.showMessageDialog(null,
-                            "Se a comprado" + uncliente.getProducto("Preparado",
-                                    getIndexPreparado((String) cbPreparado.getSelectedItem()),
-                                    getIndexIngredienteE((String) cbIngredienteEs.getSelectedItem())));
-                    System.out.println(uncliente);
-                } else {
-                    uncliente.comprar(uncliente.getProducto("Preparado",
-                            getIndexPreparado((String) cbPreparado.getSelectedItem())));
-                    JOptionPane.showMessageDialog(null, "Se a comprado" + uncliente.getProducto("Preparado",
-                            getIndexPreparado((String) cbPreparado.getSelectedItem())));
-                    System.out.println(uncliente);
-                }
-            }
-        });
         btnConfirmarPreparado.setIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/shoicon.png")));
         btnConfirmarPreparado.setBackground(new Color(30, 144, 255));
         btnConfirmarPreparado.setBounds(479, 489, 42, 37);
         getContentPane().add(btnConfirmarPreparado);
 
         lblLblconfirmar = new JLabel("");
-        lblLblconfirmar.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent arg0) {
-                try {
-                    almacenarEnBaseD(oC, dbC);
-                    p.getDesktopPane().add(new TicketDeCompra(uncliente, oC, dbC, p));
-                    setClosed(true);
-                    p.getDesktopPane().repaint();
-                    Thread hiloEmail = new Thread() {
-                        public void run() {
-                            enviarEmail(uncliente);
-                        }
-                    };
-                    hiloEmail.start();
-                } catch (PropertyVetoException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
         lblLblconfirmar.setBounds(645, 433, 96, 93);
         iconoConfirmar = new ImageIcon(
                 new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/check.png")).getImage().getScaledInstance(
@@ -369,272 +231,149 @@ public class VentanaDeCompras extends JInternalFrame {
         lblLblconfirmar.setIcon(iconoConfirmar);
         getContentPane().add(lblLblconfirmar);
 
-        lblLabelhome = new JLabel("");
-        lblLabelhome.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    VentanaUsuario aux = new VentanaUsuario(uncliente, oC, dbC, p);
-                    aux.setVisible(true);
-                    p.getDesktopPane().add(aux);
-                    p.getDesktopPane().repaint();
-                    setClosed(true);
-                } catch (PropertyVetoException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-        lblLabelhome.setBounds(600, 21, 126, 124);
+        setLblLabelhome(new JLabel(""));
+        getLblLabelhome().setBounds(600, 21, 126, 124);
         iconoHome = new ImageIcon(new ImageIcon(VentanaDeCompras.class.getResource("/Imagenes/home-icon.png"))
-                .getImage().getScaledInstance(lblLabelhome.getWidth(), lblLabelhome.getHeight(), Image.SCALE_DEFAULT));
-        lblLabelhome.setIcon(iconoHome);
-        getContentPane().add(lblLabelhome);
+                .getImage()
+                .getScaledInstance(getLblLabelhome().getWidth(), getLblLabelhome().getHeight(), Image.SCALE_DEFAULT));
+        getLblLabelhome().setIcon(iconoHome);
+        getContentPane().add(getLblLabelhome());
     }
 
-    private int getIndexBebida(String tipo) {
-        int index = 0;
-        switch (tipo) {
-        case "coca cola":
-            index = 1;
-            break;
-        case "Sprite":
-            index = 2;
-            break;
-        case "Nestea":
-            index = 3;
-            break;
-        case "Manzanita":
-            index = 4;
-            break;
-        case "Fanta":
-            index = 5;
-            break;
-        case "Boing Guayaba":
-            index = 6;
-            break;
-        case "Boing uva":
-            index = 7;
-            break;
-        case "Boing manzana":
-            index = 8;
-            break;
-        case "Agua embotellada":
-            index = 9;
-            break;
-        default:
-            index = 0;
-            break;
-        }
-        return index;
+    public JButton getBtnConfirmarPreparado() {
+        return btnConfirmarPreparado;
     }
 
-    private int getIndexGolosina(String tipo) {
-        int index = 0;
-        switch (tipo) {
-        case "Paleta":
-            index = 1;
-            break;
-        case "Gomitas":
-            index = 2;
-            break;
-        case "KitKat":
-            index = 3;
-            break;
-        case "Pasitas":
-            index = 4;
-            break;
-        case "gansito":
-            index = 5;
-            break;
-        case "Carlos XV":
-            index = 6;
-            break;
-        case "lunetas":
-            index = 7;
-            break;
-        default:
-            index = 0;
-            break;
-        }
-        return index;
+    public void setBtnConfirmarPreparado(JButton btnConfirmarPreparado) {
+        this.btnConfirmarPreparado = btnConfirmarPreparado;
     }
 
-    public int getIndexHelado(String tipo) {
-        int index = 0;
-        switch (tipo) {
-        case "Helado de Yogurt":
-            index = 1;
-            break;
-        case "Helado fresa":
-            index = 2;
-            break;
-        case "Helado de Chocolate":
-            index = 3;
-            break;
-        case "Paleta magnum Almendras":
-            index = 4;
-            break;
-        case "Helado Vainilla":
-            index = 5;
-            break;
-        case "Helado de yogurt Taro":
-            index = 6;
-            break;
-        default:
-            index = 0;
-            break;
-        }
-        return index;
+    public JRadioButton getRdbtnIngredienteExtra() {
+        return rdbtnIngredienteExtra;
     }
 
-    public int getIndexLacteo(String tipo) {
-        int index = 0;
-        switch (tipo) {
-        case "Griego Yoplait":
-            index = 1;
-            break;
-        case "Yoplait de fresa":
-            index = 2;
-            break;
-        case "Yoplait de Manzana":
-            index = 3;
-            break;
-        case "Leche 400ml Santa clara":
-            index = 4;
-            break;
-        case "Leche Deslactosada 400ml Santa clara":
-            index = 5;
-            break;
-        case "Jugo Ades":
-            index = 6;
-            break;
-        default:
-            index = 0;
-            break;
-        }
-        return index;
+    public void setRdbtnIngredienteExtra(JRadioButton rdbtnIngredienteExtra) {
+        this.rdbtnIngredienteExtra = rdbtnIngredienteExtra;
     }
 
-    private int getIndexIngredienteE(String cual) {
-        int index = 0;
-        switch (cual) {
-        case "jamon extra":
-            index = 1;
-            break;
-        case "Pechuga de pavo":
-            index = 2;
-            break;
-        case "queso extra":
-            index = 3;
-            break;
-        case "Aguacate":
-            index = 4;
-        case "Aderezos":
-            index = 5;
-            break;
-        case "Guacamole":
-            index = 6;
-            break;
-        case "BBq":
-            index = 7;
-            break;
-        case "Wasabi":
-            index = 8;
-            break;
-        default:
-            break;
-        }
-        return index;
+    public JComboBox<String> getCbPreparado() {
+        return cbPreparado;
     }
 
-    public int getIndexPreparado(String tipo) {
-        int index = 0;
-        switch (tipo) {
-        case "Sandwich":
-            index = 1;
-            break;
-        case "Molletes":
-            index = 2;
-            break;
-        case "Tortas":
-            index = 3;
-            break;
-        case "Ensalada de Atun":
-            index = 4;
-            break;
-        case "Ensalada de pollo":
-            index = 5;
-            break;
-        case "Pechuga Empanisada con ensalada":
-            index = 6;
-            break;
-        case "Enchiladas":
-            index = 7;
-            break;
-        case "Orden de tacos":
-            index = 8;
-            break;
-        case "Guisado Del dia":
-            index = 9;
-            break;
-        case "Sushi":
-            index = 10;
-            break;
-        default:
-            index = 0;
-            break;
-        }
-        return index;
-
+    public void setCbPreparado(JComboBox<String> cbPreparado) {
+        this.cbPreparado = cbPreparado;
     }
 
-    public static void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
-        try {
-            baseDatos.store(listaCliente);
-            baseDatos.commit();
-            System.out.println("Se ha almacenado correctamente en la base de datos");
-        } catch (Exception e) {
-            System.out.println("Se ha porducido un error en la insercion");
-        }
+    public JComboBox<String> getCbIngredienteEs() {
+        return cbIngredienteEs;
     }
 
-    public void enviarEmail(Cliente uncliente) {
-        try {
-            // Propiedades de la conexión
-            Properties props = new Properties();
-            props.setProperty("mail.smtp.host", "smtp.gmail.com");
-            props.setProperty("mail.smtp.starttls.enable", "true");
-            props.setProperty("mail.smtp.port", "587");
-            props.setProperty("mail.smtp.user", "proyectoscepoo@gmail.com");
-            props.setProperty("mail.smtp.auth", "true");
-
-            // Preparamos la sesion
-            Session session = Session.getDefaultInstance(props);
-
-            // Construimos el mensaje
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("proyectoscepoo@gmail.com.com"));
-            // aquien se manda el mensaje
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("proyectoscepoo@gmail.com"));
-            message.setSubject("Orden");
-            message.setText(hacerMensaje(uncliente));
-
-            // Lo enviamos.
-            Transport t = session.getTransport("smtp");
-            t.connect("proyectoscepoo@gmail.com", "proyectosceescom");
-            t.sendMessage(message, message.getAllRecipients());
-            JOptionPane.showMessageDialog(null, "la orden a sido enviada correctamente");
-            // Cierre.
-            
-            t.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al enviar mensaje no estado conectado a internet");
-        }
+    public void setCbIngredienteEs(JComboBox<String> cbIngredienteEs) {
+        this.cbIngredienteEs = cbIngredienteEs;
     }
 
-    public String hacerMensaje(Cliente uncliente) {
-        String mensaje = new String();
-        mensaje = "El Cliente:  " + uncliente.getNombre() + "\nA pedido" + uncliente;
-        return mensaje;
+    public JButton getBtnConfirmarBebida() {
+        return btnConfirmarBebida;
+    }
+
+    public void setBtnConfirmarBebida(JButton btnConfirmarBebida) {
+        this.btnConfirmarBebida = btnConfirmarBebida;
+    }
+
+    public JComboBox<String> getCbBebida() {
+        return cbBebida;
+    }
+
+    public void setCbBebida(JComboBox<String> cbBebida) {
+        this.cbBebida = cbBebida;
+    }
+
+    public JButton getBtnConfirmarGolosina() {
+        return btnConfirmarGolosina;
+    }
+
+    public void setBtnConfirmarGolosina(JButton btnConfirmarGolosina) {
+        this.btnConfirmarGolosina = btnConfirmarGolosina;
+    }
+
+    public JComboBox<String> getCbGolosina() {
+        return cbGolosina;
+    }
+
+    public void setCbGolosina(JComboBox<String> cbGolosina) {
+        this.cbGolosina = cbGolosina;
+    }
+
+    public JButton getBtnConfirmarHelado() {
+        return btnConfirmarHelado;
+    }
+
+    public void setBtnConfirmarHelado(JButton btnConfirmarHelado) {
+        this.btnConfirmarHelado = btnConfirmarHelado;
+    }
+
+    public JComboBox<String> getCbHelado() {
+        return cbHelado;
+    }
+
+    public void setCbHelado(JComboBox<String> cbHelado) {
+        this.cbHelado = cbHelado;
+    }
+
+    public JButton getBtnConfirmarLacteo() {
+        return btnConfirmarLacteo;
+    }
+
+    public void setBtnConfirmarLacteo(JButton btnConfirmarLacteo) {
+        this.btnConfirmarLacteo = btnConfirmarLacteo;
+    }
+
+    public JComboBox<String> getCbLacteo() {
+        return cbLacteo;
+    }
+
+    public void setCbLacteo(JComboBox<String> cbLacteo) {
+        this.cbLacteo = cbLacteo;
+    }
+
+    public JRadioButton getCheckElegirBebida() {
+        return checkElegirBebida;
+    }
+
+    public void setCheckElegirBebida(JRadioButton checkElegirBebida) {
+        this.checkElegirBebida = checkElegirBebida;
+    }
+
+    public JComboBox<String> getCbPaqueteDelDia() {
+        return cbPaqueteDelDia;
+    }
+
+    public void setCbPaqueteDelDia(JComboBox<String> cbPaqueteDelDia) {
+        this.cbPaqueteDelDia = cbPaqueteDelDia;
+    }
+
+    public JButton getBtnConfirmarPaqueteDelDia() {
+        return btnConfirmarPaqueteDelDia;
+    }
+
+    public void setBtnConfirmarPaqueteDelDia(JButton btnConfirmarPaqueteDelDia) {
+        this.btnConfirmarPaqueteDelDia = btnConfirmarPaqueteDelDia;
+    }
+
+    public JLabel getLblLblconfirmar() {
+        return lblLblconfirmar;
+    }
+
+    public void setLblLblconfirmar(JLabel lblLblconfirmar) {
+        this.lblLblconfirmar = lblLblconfirmar;
+    }
+
+    public JLabel getLblLabelhome() {
+        return lblLabelhome;
+    }
+
+    public void setLblLabelhome(JLabel lblLabelhome) {
+        this.lblLabelhome = lblLabelhome;
     }
 
 }

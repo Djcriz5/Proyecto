@@ -2,15 +2,15 @@ package clasesApp;
 
 import java.io.Serializable;
 
-public class Lacteo extends Producto implements IContable ,Serializable{
+public class Lacteo extends Producto implements IContable, Serializable {
     /**
      * 
      */
     private static final long serialVersionUID = -8102432301259462664L;
-    private int     indexLacteo;
-    private String  tipoLacteo;
-    private double  precio;
-    private boolean disponibilidad;
+    private int               indexLacteo;
+    private String            tipoLacteo;
+    private double            precio;
+    private boolean           disponibilidad;
 
     public Lacteo() {
         this(0);
@@ -20,8 +20,8 @@ public class Lacteo extends Producto implements IContable ,Serializable{
         super(3);
         indexLacteo = index;
         tipoLacteo = setTipoDeLacteos(indexLacteo);
-        precio=setPrecio(tipoLacteo);
-        disponibilidad=setDisponibilidad();
+        precio = setPrecio(tipoLacteo);
+        disponibilidad = setDisponibilidad();
 
     }
 
@@ -57,15 +57,18 @@ public class Lacteo extends Producto implements IContable ,Serializable{
     public double getPrecio() {
         return precio;
     }
-    private boolean setDisponibilidad(){
-        return(indexLacteo!=0); 
-      }
-    public void setLacteo(int idx){
+
+    private boolean setDisponibilidad() {
+        return (indexLacteo != 0);
+    }
+
+    public void setLacteo(int idx) {
         indexLacteo = idx;
         tipoLacteo = setTipoDeLacteos(indexLacteo);
-        precio=setPrecio(tipoLacteo);
-        disponibilidad=setDisponibilidad();
+        precio = setPrecio(tipoLacteo);
+        disponibilidad = setDisponibilidad();
     }
+
     public double setPrecio(String tipo) {
         switch (tipo) {
         case "Griego Yoplait":
@@ -92,11 +95,11 @@ public class Lacteo extends Producto implements IContable ,Serializable{
         }
         return precio;
     }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (disponibilidad) {
-            builder.append(
-                    super.toString() + "\nTipo:\n" + tipoLacteo + "\nPrecio: $" + precio + "\nDisponible");
+            builder.append(super.toString() + "\nTipo:\n" + tipoLacteo + "\nPrecio: $" + precio + "\nDisponible");
         } else {
             builder.append("lacteo No Disponible");
         }

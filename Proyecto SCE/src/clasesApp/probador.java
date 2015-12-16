@@ -32,11 +32,11 @@ public class probador {
         dulce.setGolosina(4);
         System.out.println(dulce);
         LinkedList<Producto> v = new LinkedList<Producto>();
-        //v.add(name);
-        //v.add(mibebida);
-       // v.add(yogurt);
+        // v.add(name);
+        // v.add(mibebida);
+        // v.add(yogurt);
         v.add(moyo);
-        //v.add(paquete);
+        // v.add(paquete);
         Orden ris = new Orden(v);
         ris.addProductos(dulce);
         System.out.println("/////TOTAL////////////");

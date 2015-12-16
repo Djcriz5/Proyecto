@@ -1,35 +1,14 @@
 package guideUserInterface;
 
-import java.awt.Image;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JInternalFrame;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import com.db4o.ObjectContainer;
-import com.sun.mail.util.MailConnectException;
-
-import clasesApp.Cliente;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import java.util.ArrayList;
-import java.util.Properties;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.beans.PropertyVetoException;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 public class VentanaSugerencias extends JInternalFrame {
     /**
@@ -39,13 +18,12 @@ public class VentanaSugerencias extends JInternalFrame {
     private JScrollPane       textPane;
     private JTextArea         txtCAS;
     private ImageIcon         iconoEnviar;
-    private File              name;
-    private BufferedWriter    bw;
+    private JLabel            lblLabelenviar;
 
     /**
      * Create the frame.
      */
-    public VentanaSugerencias(Cliente uncliente, ObjectContainer oC, ArrayList<Cliente> dbC, PrincipalLog p) {
+    public VentanaSugerencias() {
         getContentPane().setBackground(Color.DARK_GRAY);
         setBounds(100, 100, 587, 576);
         getContentPane().setLayout(null);
@@ -55,29 +33,7 @@ public class VentanaSugerencias extends JInternalFrame {
         textPane.setViewportView(txtCAS);
         getContentPane().add(textPane);
 
-        JLabel lblLabelenviar = new JLabel("");
-        lblLabelenviar.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    guardar(uncliente);
-                    Thread hiloEmail = new Thread() {
-                        public void run() {
-                            enviarEmail(uncliente);
-                        }
-                    };
-                    hiloEmail.start();
-                    VentanaUsuario vC = new VentanaUsuario(uncliente, oC, dbC, p);
-                    vC.setVisible(true);
-                    p.getDesktopPane().add(vC);
-                    p.getDesktopPane().repaint();
-                    setClosed(true);
-                    setClosed(true);
-                } catch (PropertyVetoException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
-        });
+        lblLabelenviar = new JLabel("");
         lblLabelenviar.setBounds(416, 29, 103, 91);
         iconoEnviar = new ImageIcon(
                 new ImageIcon(VentanaSugerencias.class.getResource("/Imagenes/enviar.png")).getImage()
@@ -90,76 +46,22 @@ public class VentanaSugerencias extends JInternalFrame {
         lblQuejasYSugerencias.setForeground(Color.WHITE);
         lblQuejasYSugerencias.setBounds(71, 61, 264, 46);
         getContentPane().add(lblQuejasYSugerencias);
-        setVisible(true);
-
     }
 
-    public void enviarEmail(Cliente uncliente) {
-        try {
-            // Propiedades de la conexión
-            Properties props = new Properties();
-            props.setProperty("mail.smtp.host", "smtp.gmail.com");
-            props.setProperty("mail.smtp.starttls.enable", "true");
-            props.setProperty("mail.smtp.port", "587");
-            props.setProperty("mail.smtp.user", "proyectoscepoo@gmail.com");
-            props.setProperty("mail.smtp.auth", "true");
-
-            // Preparamos la sesion
-            Session session = Session.getDefaultInstance(props);
-
-            // Construimos el mensaje
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("proyectoscepoo@gmail.com.com"));
-            // aquien se manda el mensaje
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("proyectoscepoo@gmail.com"));
-            message.setSubject(uncliente.getNombre());
-            message.setText(hacerMensaje(uncliente));
-
-            // Lo enviamos.
-            Transport t = session.getTransport("smtp");
-            t.connect("proyectoscepoo@gmail.com", "proyectosceescom");
-            t.sendMessage(message, message.getAllRecipients());
-
-            // Cierre.
-            t.close();
-            JOptionPane.showMessageDialog(null, "Mensaje enviado con exito");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al enviar mensaje no estado conectado a internet");
-        }
+    public JTextArea getTxtCAS() {
+        return txtCAS;
     }
 
-    public String hacerMensaje(Cliente uncliente) {
-        String mensaje = new String();
-        mensaje = "Cliente:  " + uncliente.getNombre() + "\n" + txtCAS.getText();
-        return mensaje;
+    public void setTxtCAS(JTextArea txtCAS) {
+        this.txtCAS = txtCAS;
     }
 
-    public void guardar(Cliente uncliente) {
-        name = new File("quejas.txt");
-        if (name.exists()) {
-            try {
-                BufferedReader input = new BufferedReader(new FileReader(name));
-                StringBuffer buffer = new StringBuffer();
-                String text;
-                while ((text = input.readLine()) != null)
-                    buffer.append(text);
-                PrintWriter output = new PrintWriter(new FileWriter(name));
-                output.write("///////////////////////// \n" + hacerMensaje(uncliente) + "\n " + buffer.toString()
-                        + "\n////////////////////////////////");
-                output.close();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error en el archivo", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        } else {
-            try {
-                bw = new BufferedWriter(new FileWriter(name));
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-        }
+    public JLabel getLblLabelenviar() {
+        return lblLabelenviar;
     }
+
+    public void setLblLabelenviar(JLabel lblLabelenviar) {
+        this.lblLabelenviar = lblLabelenviar;
+    }
+
 }

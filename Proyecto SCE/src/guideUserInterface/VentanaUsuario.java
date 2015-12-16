@@ -1,117 +1,50 @@
 package guideUserInterface;
 
-import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
 import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-
-import com.db4o.ObjectContainer;
-
-import clasesApp.Cliente;
-
-import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 
 public class VentanaUsuario extends JInternalFrame {
 
-    private ImageIcon      iconoP;
-    private ImageIcon      icaux;
-    private JButton        btnHacerUnPedido;
-    private JLabel         lblHacerP;
-    private ImageIcon      iconoHacerP;
-    private ImageIcon      iconoInformacion;
-    private ImageIcon      iconoHistorial;
-    private ImageIcon      iconoQuejas;
-    private JButton        btnConsultarTickets;
-    private AbstractButton btnInformacion;
-    private JButton        btnQuejas;
-    private JLabel         lblIconoP;
-    private JLabel         lblInformacion;
-    private JLabel         lblHistorial;
-    private JLabel         blbQuejas;
-    private ImageIcon      iconoPaux;
+    private ImageIcon iconoP;
+    private ImageIcon icaux;
+    private JButton   btnHacerUnPedido;
+    private JLabel    lblHacerP;
+    private ImageIcon iconoHacerP;
+    private ImageIcon iconoInformacion;
+    private ImageIcon iconoHistorial;
+    private ImageIcon iconoQuejas;
+    private JButton   btnConsultarTickets;
+    private JButton   btnInformacion;
+    private JButton   btnQuejas;
+    private JLabel    lblIconoP;
+    private JLabel    lblInformacion;
+    private JLabel    lblHistorial;
+    private JLabel    blbQuejas;
+    private ImageIcon iconoPaux;
 
-    /**
-     * 
-     * @param uncliente
-     * @param oC
-     * @param dbC
-     * @param p
-     */
-    public VentanaUsuario(Cliente uncliente, ObjectContainer oC, ArrayList<Cliente> dbC, PrincipalLog p) {
+    public VentanaUsuario() {
         getContentPane().setBackground(Color.DARK_GRAY);
         getContentPane().setLayout(null);
-        btnHacerUnPedido = new JButton("Hacer un Pedido");
-        btnHacerUnPedido.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    VentanaDeCompras shop = new VentanaDeCompras(uncliente, oC, dbC, p);
-
-                    shop.setVisible(true);
-                    p.getDesktopPane().add(shop);
-                    setClosed(true);
-                } catch (PropertyVetoException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
-        });
-        btnHacerUnPedido.setBackground(new Color(255, 0, 51));
-        btnHacerUnPedido.setBounds(15, 213, 170, 29);
-        getContentPane().add(btnHacerUnPedido);
-
+        setBtnHacerUnPedido(new JButton("Hacer un Pedido"));
+        getBtnHacerUnPedido().setBackground(new Color(255, 0, 51));
+        getBtnHacerUnPedido().setBounds(15, 213, 170, 29);
+        getContentPane().add(getBtnHacerUnPedido());
         btnConsultarTickets = new JButton("Consultar historial");
-        btnConsultarTickets.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    TicketDeCompra t = new TicketDeCompra(uncliente, oC, dbC, p);
-                    t.setVisible(true);
-                    p.getDesktopPane().add(t);
-                    setClosed(true);
-                } catch (PropertyVetoException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
-        });
         btnConsultarTickets.setBackground(new Color(255, 0, 51));
         btnConsultarTickets.setBounds(318, 213, 181, 29);
         getContentPane().add(btnConsultarTickets);
 
         btnInformacion = new JButton("informacion");
-        btnInformacion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Informacion i = new Informacion(uncliente, oC, dbC, p, VentanaUsuario.this);
-            }
-        });
         btnInformacion.setBackground(new Color(255, 0, 51));
         btnInformacion.setBounds(15, 366, 170, 29);
         getContentPane().add(btnInformacion);
 
         btnQuejas = new JButton("Quejas y sugerencias");
-        btnQuejas.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                VentanaSugerencias t = new VentanaSugerencias(uncliente, oC, dbC, p);
-                t.setVisible(true);
-                p.getDesktopPane().add(t);
-                try {
-                    setClosed(true);
-                } catch (PropertyVetoException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-
-            }
-        });
         btnQuejas.setBackground(new Color(255, 0, 51));
         btnQuejas.setBounds(318, 366, 181, 29);
         getContentPane().add(btnQuejas);
@@ -154,6 +87,38 @@ public class VentanaUsuario extends JInternalFrame {
         getContentPane().add(blbQuejas);
         setBounds(100, 100, 633, 545);
 
+    }
+
+    public JButton getBtnHacerUnPedido() {
+        return btnHacerUnPedido;
+    }
+
+    public void setBtnHacerUnPedido(JButton btnHacerUnPedido) {
+        this.btnHacerUnPedido = btnHacerUnPedido;
+    }
+
+    public JButton getBtnConsultarTickets() {
+        return btnConsultarTickets;
+    }
+
+    public void setBtnConsultarTickets(JButton btnConsultarTickets) {
+        this.btnConsultarTickets = btnConsultarTickets;
+    }
+
+    public JButton getBtnInformacion() {
+        return btnInformacion;
+    }
+
+    public void setBtnInformacion(JButton btnInformacion) {
+        this.btnInformacion = btnInformacion;
+    }
+
+    public JButton getBtnQuejas() {
+        return btnQuejas;
+    }
+
+    public void setBtnQuejas(JButton btnQuejas) {
+        this.btnQuejas = btnQuejas;
     }
 
 }

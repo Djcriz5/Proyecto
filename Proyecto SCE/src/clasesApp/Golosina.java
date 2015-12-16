@@ -2,15 +2,15 @@ package clasesApp;
 
 import java.io.Serializable;
 
-public class Golosina extends Producto implements IContable,Serializable{
+public class Golosina extends Producto implements IContable, Serializable {
     /**
      * 
      */
     private static final long serialVersionUID = -3729388314372959101L;
-    private int     indexGolosina;
-    private String  tipoGolosina;
-    private double  precio;
-    private boolean disponibilidad;
+    private int               indexGolosina;
+    private String            tipoGolosina;
+    private double            precio;
+    private boolean           disponibilidad;
 
     public Golosina() {
         this(0);
