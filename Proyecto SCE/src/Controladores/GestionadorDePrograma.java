@@ -17,7 +17,6 @@ import com.db4o.ObjectSet;
 import clasesApp.Administrador;
 import clasesApp.Cliente;
 import guideUserInterface.PrincipalLog;
-import guideUserInterface.VentanaAdmin;
 
 public class GestionadorDePrograma {
     private ArrayList<Cliente> listaDeClientes;
@@ -34,7 +33,7 @@ public class GestionadorDePrograma {
         window = new PrincipalLog();
         try {
             dbClientes = consultarBaseDeDatos(baseDeDatos, dbClientes);
-            admin = new Administrador("contrasena",baseDeDatos, dbClientes, window);
+            admin = new Administrador("contrasena", baseDeDatos, dbClientes, window);
             System.out.println("Base de datos sincronizada");
         } catch (Exception e) {
             System.out.println("error al leer base de datos");

@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaAdmin extends JInternalFrame {
     private JButton           btnEliminarCliente;
@@ -17,6 +19,7 @@ public class VentanaAdmin extends JInternalFrame {
     private JLabel            lblNewLabel;
     private ImageIcon         iconoAdmin;
     private JScrollPane       scrollpane;
+    private JButton buttonAddCliente;
 
     public VentanaAdmin() {
         getContentPane().setBackground(Color.DARK_GRAY);
@@ -38,6 +41,11 @@ public class VentanaAdmin extends JInternalFrame {
                 .getScaledInstance(lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_DEFAULT));
         lblNewLabel.setIcon(iconoAdmin);
         getContentPane().add(lblNewLabel);
+        
+         buttonAddCliente = new JButton("Registrar un Cliente");
+        buttonAddCliente.setBackground(Color.GREEN);
+        buttonAddCliente.setBounds(181, 425, 171, 29);
+        getContentPane().add(buttonAddCliente);
         modelo = (DefaultTableModel) table.getModel();
         modelo.addColumn("Cliente");
         modelo.addColumn("Nombre");
@@ -68,5 +76,13 @@ public class VentanaAdmin extends JInternalFrame {
 
     public void setBtnEliminarCliente(JButton btnEliminarCliente) {
         this.btnEliminarCliente = btnEliminarCliente;
+    }
+
+    public JButton getButtonAddCliente() {
+        return buttonAddCliente;
+    }
+
+    public void setButtonAddCliente(JButton buttonAddCliente) {
+        this.buttonAddCliente = buttonAddCliente;
     }
 }

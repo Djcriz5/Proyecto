@@ -11,12 +11,14 @@ import javax.swing.table.DefaultTableModel;
 
 import com.db4o.ObjectContainer;
 
+import guideUserInterface.DialogoNuevoCliente;
 import guideUserInterface.PrincipalLog;
 import guideUserInterface.VentanaAdmin;
 
 public class Administrador {
-    private String       contrasena;
-    private VentanaAdmin adminV;
+    private String                contrasena;
+    private VentanaAdmin          adminV;
+    protected DialogoNuevoCliente dialogoCliente;
 
     public Administrador(String pass, ObjectContainer oC, ArrayList<Cliente> dbC, PrincipalLog p) {
         contrasena = pass;
@@ -63,20 +65,75 @@ public class Administrador {
         adminV.getBtnEliminarCliente().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 dbC.remove(adminV.getTable().getSelectedRow());
-                adminV.setModelo(new DefaultTableModel());
-                adminV.getModelo().addColumn("Cliente");
-                adminV.getModelo().addColumn("Nombre");
-                adminV.getModelo().addColumn("Contrasena");
-                adminV.getModelo().addColumn("Numero de Targeta");
-                adminV.getModelo().addColumn("Saldo");
-                adminV.getTable().setModel(adminV.getModelo());
+                refrescarTabla();
                 llenarTabla(dbC);
                 almacenarEnBaseD(oC, dbC);
                 JOptionPane.showMessageDialog(null, "Cliente Eliminado");
             }
         });
+        adminV.getButtonAddCliente().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                Thread addClientes = new Thread() {
+                    public void run() {
+                        dialogoCliente = new DialogoNuevoCliente();
+                        p.getDesktopPane().repaint();
+                        dialogoCliente.getOkButton().addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent arg0) {
+                                addCliente(dbC, oC);
+                                refrescarTabla();
+                                llenarTabla(dbC);
+                                dialogoCliente.setVisible(false);
+                            }
+                        });
+                    }
+                };
+                addClientes.run();
+            }
+        });
         adminV.setVisible(true);
 
+    }
+
+    public void addCliente(ArrayList<Cliente> dbC, ObjectContainer oC) {
+        if (dialogoCliente.getReposNombre().getText().equals("Admin")) {
+            JOptionPane.showMessageDialog(null, "usuario reservado escoja otro nombre");
+        } else {
+            if (buscarCliente(dialogoCliente.getReposNombre().getText(), dialogoCliente.getReposPassWord().getText(),
+                    dbC) == null) {
+                if (dialogoCliente.getRdbtnUsarTargeta().isSelected()) {
+                    try {
+                        dbC.add(new Cliente(dialogoCliente.getReposNombre().getText(),
+                                dialogoCliente.getReposPassWord().getText(),
+                                Long.valueOf(dialogoCliente.getRepostargeta().getText()), 800));
+                        almacenarEnBaseD(oC, dbC);
+                        JOptionPane.showMessageDialog(null, "Registro exitoso");
+                    } catch (Exception e) {
+                        System.out.println("error al almacenar Cliente");
+                    }
+                } else {
+                    try {
+                        dbC.add(new Cliente(dialogoCliente.getReposNombre().getText(),
+                                dialogoCliente.getReposPassWord().getText()));
+                        almacenarEnBaseD(oC, dbC);
+                        JOptionPane.showMessageDialog(null, "Registro exitoso");
+                    } catch (Exception e) {
+                        System.out.println("error al almacenar Cliente");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario registrado escoja otro usuario");
+            }
+        }
+    }
+
+    public Cliente buscarCliente(String nom, String pass, ArrayList<Cliente> dbC) {
+        Cliente buscado = null;
+        for (Cliente cliente : dbC) {
+            if (cliente.getNombre().equals(nom) && cliente.getPassword().equals(pass)) {
+                buscado = cliente;
+            }
+        }
+        return buscado;
     }
 
     public VentanaAdmin getVentanaAdmin() {
@@ -95,6 +152,17 @@ public class Administrador {
 
     public Cliente buscarPorPocision(ArrayList<Cliente> listaCliente, int i) {
         return listaCliente.get(i);
+    }
+
+    public void refrescarTabla() {
+        adminV.setModelo(new DefaultTableModel());
+        adminV.getModelo().addColumn("Cliente");
+        adminV.getModelo().addColumn("Nombre");
+        adminV.getModelo().addColumn("Contrasena");
+        adminV.getModelo().addColumn("Numero de Targeta");
+        adminV.getModelo().addColumn("Saldo");
+        adminV.getTable().setModel(adminV.getModelo());
+
     }
 
     public static void almacenarEnBaseD(ObjectContainer baseDatos, ArrayList<Cliente> listaCliente) {
