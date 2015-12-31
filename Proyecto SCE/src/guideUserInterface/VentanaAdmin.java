@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaAdmin extends JInternalFrame {
     private JButton           btnEliminarCliente;
@@ -19,6 +21,7 @@ public class VentanaAdmin extends JInternalFrame {
     private ImageIcon         iconoAdmin;
     private JScrollPane       scrollpane;
     private JButton           buttonAddCliente;
+    private JButton           buttonBuscar;
 
     public VentanaAdmin() {
         getContentPane().setBackground(Color.DARK_GRAY);
@@ -45,6 +48,15 @@ public class VentanaAdmin extends JInternalFrame {
         buttonAddCliente.setBackground(Color.GREEN);
         buttonAddCliente.setBounds(181, 425, 171, 29);
         getContentPane().add(buttonAddCliente);
+
+        buttonBuscar = new JButton("Buscar");
+        buttonBuscar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+            }
+        });
+        buttonBuscar.setBackground(Color.GREEN);
+        buttonBuscar.setBounds(364, 425, 171, 29);
+        getContentPane().add(buttonBuscar);
         modelo = (DefaultTableModel) table.getModel();
         modelo.addColumn("Cliente");
         modelo.addColumn("Nombre");
@@ -83,5 +95,13 @@ public class VentanaAdmin extends JInternalFrame {
 
     public void setButtonAddCliente(JButton buttonAddCliente) {
         this.buttonAddCliente = buttonAddCliente;
+    }
+
+    public JButton getButtonBuscar() {
+        return buttonBuscar;
+    }
+
+    public void setButtonBuscar(JButton buttonBuscar) {
+        this.buttonBuscar = buttonBuscar;
     }
 }

@@ -10,7 +10,9 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.db4o.ObjectContainer;
+import com.db4o.query.Query;
 
+import guideUserInterface.DialogoBuscar;
 import guideUserInterface.DialogoNuevoCliente;
 import guideUserInterface.PrincipalLog;
 import guideUserInterface.VentanaAdmin;
@@ -52,6 +54,21 @@ public class Administrador {
                     }
                 };
                 addClientes.run();
+            }
+        });
+        adminV.getButtonBuscar().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                DialogoBuscar buscarDialogo = new DialogoBuscar();
+                buscarDialogo.getOkButton().addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        ArrayList<Cliente>  listaClasificada = getAllNombre(dbC,buscarDialogo.getReposNombre().getText());
+                        refrescarTabla();
+                        llenarTabla(listaClasificada);
+                        addEventListener(listaClasificada,dbC,oC);
+                        buscarDialogo.dispose();
+                    }
+                });
+                
             }
         });
         adminV.setVisible(true);
@@ -114,6 +131,19 @@ public class Administrador {
         }
     }
 
+    public ArrayList<Cliente> getAllNombre(ArrayList<Cliente> listaCliente, String clave) {
+        ArrayList<Cliente> query = new ArrayList<>();
+        for (Cliente cliente : listaCliente) {
+            if (cliente.getNombre().contains(clave)) {
+                query.add(cliente);
+            }
+        }
+        if(query.size()<=0){
+            JOptionPane.showMessageDialog(null, "la busqueda no arrojo resultados");
+        }
+        return query;
+    }
+
     public Cliente buscarPorPocision(ArrayList<Cliente> listaCliente, int i) {
         return listaCliente.get(i);
     }
@@ -173,6 +203,46 @@ public class Administrador {
                     if (columna == 4) {
                         try {
                             buscarPorPocision(dbC, row).setCredito(
+                                    Double.parseDouble(adminV.getTable().getValueAt(row, columna).toString()));
+                            almacenarEnBaseD(oC, dbC);
+                            JOptionPane.showMessageDialog(null, "Se actualizo el Credito del cliente");
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Cantidad Invalida Intente de Nuevo");
+                        }
+                    }
+                }
+            }
+        });
+    }
+    public void addEventListener(ArrayList<Cliente> clasificada,ArrayList<Cliente> dbC, ObjectContainer oC) {
+        adminV.getModelo().addTableModelListener(new TableModelListener() {
+            public void tableChanged(TableModelEvent tme) {
+                if (tme.getType() == TableModelEvent.UPDATE) {
+                    int columna = tme.getColumn();
+                    int row = tme.getFirstRow();
+                    if (columna == 1) {
+                        buscarPorPocision(clasificada, row).setNombre(adminV.getTable().getValueAt(row, columna).toString());
+                        almacenarEnBaseD(oC, dbC);
+                        JOptionPane.showMessageDialog(null, "Se actualizo el nombre");
+                    }
+                    if (columna == 2) {
+                        buscarPorPocision(clasificada, row).setPassword(adminV.getTable().getValueAt(row, columna).toString());
+                        almacenarEnBaseD(oC, dbC);
+                        JOptionPane.showMessageDialog(null, "Se actualizo el la contrasena");
+                    }
+                    if (columna == 3) {
+                        try {
+                            buscarPorPocision(clasificada, row).setNumeroTargeta(
+                                    Long.parseLong(adminV.getTable().getValueAt(row, columna).toString()));
+                            almacenarEnBaseD(oC, dbC);
+                            JOptionPane.showMessageDialog(null, "Se actualizo el Numero de Targeta");
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Targeta Invalida Intente de Nuevo");
+                        }
+                    }
+                    if (columna == 4) {
+                        try {
+                            buscarPorPocision(clasificada, row).setCredito(
                                     Double.parseDouble(adminV.getTable().getValueAt(row, columna).toString()));
                             almacenarEnBaseD(oC, dbC);
                             JOptionPane.showMessageDialog(null, "Se actualizo el Credito del cliente");
