@@ -10,9 +10,15 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import com.db4o.Db4o;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.config.EmbeddedConfiguration;
+import com.db4o.io.IoAdapter;
+import com.db4o.io.IoAdapterStorage;
+import com.db4o.io.crypt.XTEA;
+import com.db4o.io.crypt.XTeaEncryptionFileAdapter;
 
 import clasesApp.Administrador;
 import clasesApp.Cliente;
@@ -29,7 +35,10 @@ public class GestionadorDePrograma {
         listaDeClientes = new ArrayList<Cliente>();
         ;
         dbClientes = listaDeClientes;
-        setBaseDeDatos(Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "clientes.db4o"));
+        setBaseDeDatos(Db4oEmbedded.openFile("clientes.db4o"));
+        //setBaseDeDatos(Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "clientes.db4o"));
+        Db4o.configure ().io(new XTeaEncryptionFileAdapter( "contrasena", XTEA.ITERATIONS64) );
+     
         window = new PrincipalLog();
         try {
             dbClientes = consultarBaseDeDatos(baseDeDatos, dbClientes);

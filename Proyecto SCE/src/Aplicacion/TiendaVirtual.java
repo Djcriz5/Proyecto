@@ -8,6 +8,6 @@ public class TiendaVirtual {
      * gestionar las demasfunciones de la aplicacion
      */
     public static void main(String[] args) {
-        GestionadorDePrograma gdp = new GestionadorDePrograma();
+        new GestionadorDePrograma();
     }
 }
